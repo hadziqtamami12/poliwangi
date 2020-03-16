@@ -1,0 +1,30 @@
+.box-login{
+	width: 350px;
+	/*membuat bg transparan*/
+	background-color:rgba(238,238,238,0.5);
+	/*meletakkan form ke tengah*/
+	margin: 80px auto;
+	padding: 50px 40px;
+	border-radius: 20px;
+
+}
+.login-button{
+	/*background: #70A1D7;*/
+	background: #16254E;
+	color: white;
+	font-size: 11pt;
+	width: 100%;
+	border: none;
+	border-radius: 3px;
+	padding: 10px 20px;
+
+}
+
+#login-btn{
+	margin-top:20px;
+	width: 100%;
+}
+
+#inputan{
+	border-radius: 20px;
+}
