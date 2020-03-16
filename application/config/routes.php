@@ -51,18 +51,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 $route = array(
-    'default_controller' => 'front',
-    'api' => 'api/api',
-    'Signout' => 'Signout',
-    'Join' => 'C_utama/join',
-    'J-Ride' => 'C_utama/j_ride',
-    'J-Car' => 'C_utama/j_car',
-    'J-Service' => 'C_utama/j_service',
-    'J-Massage' => 'C_utama/j_massage',
-    'J-Box' => 'C_utama/j_box',
-    'J-Food' => 'C_utama/j_food',
-    'J-Mart' => 'C_utama/j_mart',
-    'cek_user' => 'C_utama/cekuser',
+    'default_controller' => 'Front',
+    'sikasep' => 'Sikasep',
+    // 'sikasep/rekap' => 'Rekap',
+    // 'sikasep/security' => 'Security',
+    // 'sikasep/jam_kerja' => 'Jam_Kerja',
+    // 'sikasep/golongan' => 'Golongan',
+    // 'sikasep/status_hari' => 'Status_Hari',
+    // 'sikasep/keterangan' => 'Keterangan',
+    // 'J-Box' => 'C_utama/j_box',
+    // 'J-Food' => 'C_utama/j_food',
+    // 'J-Mart' => 'C_utama/j_mart',
+    // 'cek_user' => 'C_utama/cekuser',
     //tambahkan tinggal copy saja dan nama sesuai controller
     '' => '',
 );

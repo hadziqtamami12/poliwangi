@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Welcome extends MY_Controller {
+class Keterangan extends MY_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -20,6 +20,14 @@ class Welcome extends MY_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		$data = array(
+        	    'title'     =>   'Hello World!'
+			    // 'content'   =>   'This is the content',
+			    // 'posts'     =>   array('Post 1', 'Post 2', 'Post 3')
+        );
+        $this->template->load('layout/template', 'keterangan/index', $data);
+
 	}
+
+
 }
