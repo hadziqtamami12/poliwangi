@@ -52,7 +52,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $route = array(
     'default_controller' => 'Front',
-    'sikasep' => 'Sikasep',
+    // 'Sikasep' => 'sikasep/Dashboard',
+    'Login-User' => 'auth/index',
     // 'sikasep/rekap' => 'Rekap',
     // 'sikasep/security' => 'Security',
     // 'sikasep/jam_kerja' => 'Jam_Kerja',

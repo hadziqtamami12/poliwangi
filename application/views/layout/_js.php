@@ -1,4 +1,90 @@
-<!-- JavaScript -->
-<script src="<?php echo base_url('assets');?>/vendor/bootstrap/js/bootstrap.min.js"></script>
-<script src="<?php echo base_url('assets');?>/vendor/iCheck/icheck.min.js"></script>
-<script src="<?php echo base_url('assets');?>/vendor/AdminLTE-2.4.3/js/adminlte.min.js"></script>
+<!-- JAVASCRIPT
+================================================== -->
+<!-- Global JS -->
+<script src="<?php echo base_url('assets');?>/js/jquery.min.js"></script>
+<script src="<?php echo base_url('assets');?>/js/popper.min.js"></script>
+
+<!-- Plugins JS -->
+<script src="<?php echo base_url('assets');?>/js/bootstrap.min.js"></script>
+
+<!-- Slick JS -->
+<script src="<?php echo base_url('assets');?>/js/jquery.easing.1.3.js"></script>
+<script src="<?php echo base_url('assets');?>/js/slick.min.js"></script>
+<!-- Theme JS -->
+
+<script type="text/javascript">
+(function($) {
+    "use_strict";
+    
+
+    
+  // SCROLL TO TOP
+  
+  $(window).on('scroll', function () {
+    if ($(window).scrollTop() > 70) {
+        $('.scroll-to-top').addClass('reveal');
+    } else {
+        $('.scroll-to-top').removeClass('reveal');
+    }
+});
+ 
+ 
+/* ----------------------------------------------------------- */
+    /*  Fixed header
+    /* ----------------------------------------------------------- */
+
+
+    $(window).on('scroll', function () {
+        if ($(window).scrollTop() > 70) {
+            $('.site-navigation,.trans-navigation').addClass('header-white');
+        } else {
+            $('.site-navigation,.trans-navigation').removeClass('header-white');
+        }
+
+    });
+
+
+    
+  // Smooth scrolling using jQuery easing
+// jQuery for page scrolling feature - requires jQuery Easing plugin
+    
+    
+    $('a.js-scroll-trigger').on('click', function(event) {
+        var $anchor = $(this);
+        $('html, body').stop().animate({
+            scrollTop: $($anchor.attr('href')).offset().top
+        }, 1500, 'easeInOutExpo');
+        event.preventDefault();
+    });
+
+
+  // Closes responsive menu when a scroll trigger link is clicked
+  $('.js-scroll-trigger').on('click', function(event) {
+    $('.navbar-collapse').collapse('hide');
+  });
+
+   
+
+          /*START GOOGLE MAP*/
+          function initialize() {
+            var mapOptions = {
+              zoom: 15,
+              scrollwheel: false,
+              center: new google.maps.LatLng(40.7127837, -74.00594130000002)
+            };
+            var map = new google.maps.Map(document.getElementById('map'),
+                mapOptions);
+            var marker = new google.maps.Marker({
+              position: map.getCenter(),
+              icon: 'assets/img/map_pin.png',
+              map: map
+            });
+          }
+          google.maps.event.addDomListener(window, 'load', initialize);	
+          /*END GOOGLE MAP*/	
+
+ 
+
+})(jQuery); // End of use strict
+
+</script>

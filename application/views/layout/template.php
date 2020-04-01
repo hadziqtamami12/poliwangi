@@ -11,15 +11,14 @@
 
 	<!-- css -->
 	<?php require_once('_css.php') ;?>
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-	<!-- jQuery 2.2.3 -->
 	<script src="<?php echo base_url('assets');?>/vendor/jquery/jquery.min.js"></script>
 </head>
 
-<body class="hold-transition skin-blue fixed sidebar-mini">
-	<div class="wrapper">
+
+<body class="fixed" id="top-header">
+	<!-- <div class="container"> -->
 		<!-- header -->
-		<?php require_once('_header.php') ;?>
+		<?php require_once('_nav.php') ;?>
 		<!-- sidebar -->
 		<!-- <?php require_once('_sidebar.php') ;?> -->
 		<!-- content -->
@@ -32,8 +31,9 @@
 		<!-- footer -->
 		<?php require_once('_footer.php') ;?>
 
-		<div class="control-sidebar-bg"></div>
-	</div>
+        <i class="fa fa-angle-up"></i>
+    </a>
+	<!-- </div> -->
 	<!-- js -->
 	<?php require_once('_js.php') ;?>
 </body>
