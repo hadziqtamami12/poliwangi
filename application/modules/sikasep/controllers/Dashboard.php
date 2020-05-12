@@ -19,12 +19,18 @@ class Dashboard extends MY_Controller {
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
 
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->model('m_dashboard');
+	}
+
 	public function index()
 	{
 		$data = array(
-        	    'title'     =>   'Dashboard'
-			    // 'content'   =>   'This is the content',
-			    // 'posts'     =>   array('Post 1', 'Post 2', 'Post 3')
+        	    'title' =>   'Dashboard',
+			    'graph' => $this->m_dashboard->graph(),
+			    // 'total' => $this->db->get_where('tb_user', ['active'=>'1']),
         );
         $this->template->load('layout/template', 'dashboard/index', $data);
 

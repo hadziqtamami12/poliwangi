@@ -18,16 +18,28 @@ class Rekap extends MY_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->model('m_rekap');
+	}
+
 	public function index()
 	{
 		$data = array(
-        	    'title'     =>   'Rekapitulasi Presensi Pegawai'
-			    // 'content'   =>   'This is the content',
-			    // 'posts'     =>   array('Post 1', 'Post 2', 'Post 3')
+        	    'title'     =>   'Rekapitulasi Presensi Pegawai',
+			    // 'graph' => $this->m_rekap->user_list(),
+			    // 'total' => $this->db->get_where('tb_user', ['active'=>'1']),
         );
         $this->template->load('layout/template', 'rekap/index', $data);
 
 	}
+
+	function data_user(){
+        $data=$this->m_rekap->user_list();
+        echo json_encode($data);
+    }
 
 
 }

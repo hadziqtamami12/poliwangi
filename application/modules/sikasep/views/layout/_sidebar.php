@@ -1,51 +1,63 @@
-<!-- Left side column. contains the logo and sidebar -->
-<aside class="main-sidebar">
+<!-- Sidebar -->
+    <div class="border-right" id="sidebar-wrapper">
+      <div class="sidebar-heading border-bottom"><img src="<? echo base_url(); ?>assets/admin/img/poliwangi.png"></div>
+      <div class="list-group list-group-flush" id="myTab">
+        
 
-  <!-- sidebar: style can be found in sidebar.less -->
-  <section class="sidebar">
+              <a class="list-group-item list-group-item-action" href="<? echo base_url(); ?>sikasep/Dashboard">
+                <i class="ni ni-tv-2 text-primary"></i>
+                <span class="fa fa-list pull-left"></span>Beranda
+              </a>
 
-    <!-- Sidebar user panel (optional) -->
-    <div class="user-panel">
-      <div class="text-center image">
-				<img src="<?php echo base_url('assets/upload/images/foto_profil/'.$this->session->userdata('photo')); ?>" class="img-circle">
-			</div>
-      <div class="text-center info">
-        <p><?php echo $this->session->userdata('last_name'); ?></p>
-        <!-- Status -->
-        <!-- <a href="<?= base_url(); ?>sikasep/"><i class="fa fa-circle text-success"></i> Online</a> -->
+              <a class="list-group-item list-group-item-action" href="<? echo base_url(); ?>sikasep/Rekap">
+                <i class="ni ni-planet text-orange"></i>
+                <span class="fa fa-list pull-left"></span>Rekap
+              </a>
+            
+              
+            
+              <a class="list-group-item list-group-item-action" href="<? echo base_url(); ?>sikasep/Security">
+                <i class="ni ni-pin-3 text-primary"></i>
+                <span class="fa fa-list pull-left"></span>Shift Security
+              </a>
+            
+            
+              <a class="list-group-item list-group-item-action" href="<? echo base_url(); ?>sikasep/Jam_Kerja">
+                <i class="ni ni-single-02 text-yellow"></i>
+                <span class="fa fa-list pull-left"></span>Jam Kerja Pegawai
+              </a>
+            
+              
+            
+              <a class="list-group-item list-group-item-action" href="<? echo base_url(); ?>sikasep/Golongan">
+                <i class="ni ni-bullet-list-67 text-default"></i>
+                <span class="fa fa-list pull-left"></span>Golongan Pegawai
+              </a>
+            
+              
+            
+              <a class="list-group-item list-group-item-action" href="<? echo base_url(); ?>sikasep/Status_Hari">
+                <i class="ni ni-key-25 text-info"></i>
+                <span class="fa fa-list pull-left"></span>Status Hari Kerja
+              </a>
+            
+
+            
+              <a class="list-group-item list-group-item-action" href="<? echo base_url(); ?>sikasep/Keterangan">
+                <i class="ni ni-circle-08 text-pink"></i>
+                <span class="fa fa-list pull-left"></span>Kehadiran
+              </a>
+            
+      </div>
+
+      <div class="line">&nbsp;</div>
+
+      <div class="btn-logout">
+      <div class="line">&nbsp;</div>
+
+        <div class="logout pb-0">
+          <a href="<? echo base_url(); ?>Logout-User" class="list-group-item list-group-item-action"> <span class="fa fa-list pull-left"></span> logout</a>
+        </div>
       </div>
     </div>
-
-
-    <!-- Sidebar Menu -->
-    <ul class="sidebar-menu" data-widget="tree">
-      <!-- <?php foreach ($variable as $key ) {
-        
-      ?>
-      <li class="header text-center"><?= $key->nama_jabatan; ?></li>
-      <?php } ?> -->
-      <!-- Optionally, you can add icons to the links -->
-      <li class="active"><a href="<?= base_url(); ?>sikasep"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
-      <li class=""><a href="<?= base_url(); ?>sikasep/Rekap"><i class="fa fa-link"></i> <span>Rekap</span></a></li>
-      <li class=""><a href="<?= base_url(); ?>sikasep/Security"><i class="fa fa-link"></i> <span>Shift Security</span></a></li>
-      <li class=""><a href="<?= base_url(); ?>sikasep/Jam_Kerja"><i class="fa fa-link"></i> <span>Jam Kerja Pegawai</span></a></li>
-      <li class=""><a href="<?= base_url(); ?>sikasep/Golongan"><i class="fa fa-link"></i> <span>Golongan Pegawai</span></a></li>
-      <li class=""><a href="<?= base_url(); ?>sikasep/Status_Hari"><i class="fa fa-link"></i> <span>Status Hari Kerja</span></a></li>
-      <li class=""><a href="<?= base_url(); ?>sikasep/Keterangan"><i class="fa fa-link"></i> <span>Keterangan Kehadiran</span></a></li>
-      <!-- <li><a href="<?= base_url(); ?>sikasep/"><i class="fa fa-link"></i> <span>Another Link</span></a></li> -->
-      <!-- <li class="treeview">
-        <a href="<?= base_url(); ?>sikasep/"><i class="fa fa-link"></i> <span>Multilevel</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-        <ul class="treeview-menu">
-          <li><a href="<?= base_url(); ?>sikasep/">Link in level 2</a></li>
-          <li><a href="<?= base_url(); ?>sikasep/">Link in level 2</a></li>
-        </ul>
-      </li> -->
-    </ul>
-    <!-- /.sidebar-menu -->
-  </section>
-  <!-- /.sidebar -->
-</aside>
+    <!-- /#sidebar-wrapper -->

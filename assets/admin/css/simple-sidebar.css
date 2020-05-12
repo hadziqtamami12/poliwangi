@@ -1,0 +1,232 @@
+body {
+  overflow-x: hidden;
+}
+
+.dropdown a{
+  color: white;
+  font-style: none;
+  min-width: 100px;
+  display: inline-flex;
+  justify-content: space-around;
+}
+
+.dropdown h6{
+  color: white;
+}
+
+.dropdown span.fa-user{
+  background-color: #D8B445;
+  color: white;
+  width: 25px;
+  height: 27px;
+  text-align: center;
+  padding-top: 5%;
+  margin-top: -5%;
+  border-radius: 50%;
+}
+
+#menu-toggle{
+  opacity: 0;
+  cursor: default;
+  margin-left: -90px;
+  margin-right: 90px;
+}
+@media(max-width: 768px){
+  #menu-toggle{
+    opacity: 1;
+    margin-left: 0;
+  }
+  .nav-breadcrumb{
+    opacity: 0;
+  }
+
+  .card-info-item span, h3{
+    font-size: 30px;
+  }
+
+  .card-info-item h6{
+    font-size: 15px;
+    margin-bottom: -5%;
+  }
+
+  .card-info-item .info-data{
+    margin-left: 0;
+  }
+
+}
+
+.list-group a span{
+  margin-right: 20%;
+  color: yellow;
+}
+
+.list-group, .list-group-item{
+  border: none;
+  background-color: #5577D4;
+  color: white;
+  line-height: 1;
+
+}
+
+span{
+  /*color: yellow;*/
+}
+
+.line{
+  background-color: yellow;
+  width: 80%;
+  max-height: 2px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+div.btn-logout .line{
+  background-color: yellow;
+  width: 90%;
+  max-height: 2px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
+.list-group{
+  padding-bottom: 7%;
+}
+
+#sidebar-wrapper {
+  min-height: 100vh;
+  margin-left: -15rem;
+  -webkit-transition: margin .25s ease-out;
+  -moz-transition: margin .25s ease-out;
+  -o-transition: margin .25s ease-out;
+  transition: margin .25s ease-out;
+  background-color: #5577D4;
+}
+
+#sidebar-wrapper a{
+  font-size: 1em;
+  padding-top: 7%;
+}
+
+#sidebar-wrapper .sidebar-heading {
+  padding: 1rem;
+  text-align: center;
+  background-color: #fff;
+
+}
+
+#sidebar-wrapper .sidebar-heading img{
+  max-height: 100px;
+  max-width: 100px;
+}
+
+#page-content-wrapper .navbar{
+  padding: 1%;
+  padding-bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #5577D4;
+  border-bottom: 5px solid yellow;
+}
+
+#sidebar-wrapper .list-group {
+  width: 15rem;
+}
+
+#page-content-wrapper {
+  min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  #sidebar-wrapper {
+    margin-left: 0;
+  }
+
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -15rem;
+  }
+
+}
+
+.nav-breadcrumb .breadcrumb-item {
+  color: white;
+  font-size: 0.9em;
+
+}
+
+.nav-breadcrumb .breadcrumb{
+  background-color: rgba(255,255,255, 0.3);
+  border-radius: 10%;
+}
+
+.btn-logout{
+  bottom: 0;
+  left: 0.5%;
+  position: fixed;
+  width: 18%;
+  margin-bottom: 1%;
+}
+
+
+.logout{
+  margin-top: 7%;
+}
+
+.logout a{
+  background-color: rgba(255,255,255, 0.3);
+  border-radius: 50%;
+  width: 90%;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 5%;
+
+}
+
+.logout a span{
+  margin-right: 15%;
+}
+
+
+
+.card-info{
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+
+}
+
+.card-info-item{
+  color: white;
+  width: 27%;
+  background: #5577D4;
+  margin: 1.5%;
+  padding: 2%;
+  border-radius: 5%;
+  display: inline-flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.card-info-item span{
+  border-right: 5px solid yellow;
+  color: white;
+}
+
+.info-data{
+  margin-left: -5%;
+  padding-left: 10%;
+}
+
+.info-data h3{
+  color: yellow;
+}

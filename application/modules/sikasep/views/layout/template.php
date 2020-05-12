@@ -13,27 +13,27 @@
 	<!-- css -->
 	<?php require_once('_css.php') ;?>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-	<!-- jQuery 2.2.3 -->
-	<script src="<?php echo base_url('assets');?>/vendor/jquery/jquery.min.js"></script>
 </head>
 
 <body>
-	<div class="wrapper">
+	<div class="d-flex" id="wrapper">
 		
 		<!-- header -->
-		<?php require_once('_header.php') ;?>
+		<?php require_once('_sidebar.php') ;?>
 		<!-- sidebar -->
 		<!-- content -->
-		<div class="content-wrapper">
+		<div id="page-content-wrapper">
 			<!-- Main content -->
-			<section class="content">
+		<?php require_once('_nav.php') ;?>
+			<div class="container">
+				<?php require_once('_header.php') ;?>
 				<?php echo $contents ;?>
-			</section>
+			</div>
 		</div>
 		<!-- footer -->
 		<?php require_once('_footer.php') ;?>
 
-		<div class="control-sidebar-bg"></div>
+		<!-- <div class="control-sidebar-bg"></div> -->
 	</div>
 	<!-- js -->
 	<?php require_once('_js.php') ;?>

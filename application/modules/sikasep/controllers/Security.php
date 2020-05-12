@@ -18,16 +18,28 @@ class Security extends MY_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->model('m_security');
+	}
+
 	public function index()
 	{
 		$data = array(
-        	    'title'     =>   'Shift Security'
-			    // 'content'   =>   'This is the content',
-			    // 'posts'     =>   array('Post 1', 'Post 2', 'Post 3')
+        	    'title'     =>   'Shift Security',
+			    'graph' => $this->m_security->graph(),
+			    'total' => $this->db->get_where('tb_user', ['active'=>'1']),
         );
         $this->template->load('layout/template', 'security/index', $data);
 
 	}
 
+	public function edit($id){
+		$where = array('id_user' => $id);
+			$data['user'] = $this->m_security->edit_data($where,'tb_user')->result();
+	        $this->template->load('layout/template', 'security/index', $data);
+	}
 
 }
