@@ -1,6 +1,8 @@
 <!-- Sidebar -->
     <div class="border-right" id="sidebar-wrapper">
-      <div class="sidebar-heading border-bottom"><img src="<? echo base_url(); ?>assets/admin/img/poliwangi.png"></div>
+      <div class="sidebar-heading border-bottom"><img src="<? echo base_url(); ?>assets/admin/img/poliwangi.png">
+      <h6><?php echo $this->session->userdata('level_user'); ?></h6>
+      </div>
       <div class="list-group list-group-flush" id="myTab">
         
 

@@ -1,95 +1,48 @@
- <!-- Sidenav -->
-  <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
-    <div class="scrollbar-inner">
-        
-        
-      <!-- Brand -->
-      <div class="sidenav-header  align-items-center">
-        <a class="navbar-brand" href="<? echo base_url(); ?>sikasep/javascript:void(0)">
-          <img src="<?php echo base_url() ;?>assets/admin/img/profi.jpg" class="navbar-brand-img">
+<nav class="navbar navbar-expand-lg">
+        <button class="btn btn-primary" id="menu-toggle">
+          <i class="fa fa-arrow-right" id="icon-toogle"></i>
+        </button>
 
-        </a>
-      </div>
-        
-      <div class="navbar-inner">
-        <!-- Collapse -->
-        <div class="collapse navbar-collapse" id="sidenav-collapse-main">
-          <!-- Nav items -->
-          <ul class="navbar-nav">
-              
-            <li class="nav-item">
-              <a class="nav-link active" href="<? echo base_url(); ?>sikasep/Dashboard">
-                <i class="ni ni-tv-2 text-primary"></i>
-                <span class="nav-link-text">Beranda</span>
-              </a>
-            </li>
-              
-            <li class="nav-item">
-              <a class="nav-link" href="<? echo base_url(); ?>sikasep/Rekap">
-                <i class="ni ni-planet text-orange"></i>
-                <span class="nav-link-text">Rekap</span>
-              </a>
-            </li>
-              
-            <li class="nav-item">
-              <a class="nav-link" href="<? echo base_url(); ?>sikasep/Security">
-                <i class="ni ni-pin-3 text-primary"></i>
-                <span class="nav-link-text">Shift Security</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="<? echo base_url(); ?>sikasep/Jam_Kerja">
-                <i class="ni ni-single-02 text-yellow"></i>
-                <span class="nav-link-text">Jam Kerja Pegawai</span>
-              </a>
-            </li>
-              
-            <li class="nav-item">
-              <a class="nav-link" href="<? echo base_url(); ?>sikasep/Golongan">
-                <i class="ni ni-bullet-list-67 text-default"></i>
-                <span class="nav-link-text">Golongan Pegawai</span>
-              </a>
-            </li>
-              
-            <li class="nav-item">
-              <a class="nav-link" href="<? echo base_url(); ?>sikasep/Status_Hari">
-                <i class="ni ni-key-25 text-info"></i>
-                <span class="nav-link-text">Status Hari Kerja</span>
-              </a>
-            </li>
+        <nav aria-label="breadcrumb" class="nav-breadcrumb pull-left">
+              <ol class="breadcrumb">
+                <!-- <li class="breadcrumb-item">Home</li>
+                <li class="breadcrumb-item active" aria-current="page">Data</li> -->
+                <?php foreach ($this->uri->segments as $segment): ?>
+                  <?php 
+                  $url = substr($this->uri->uri_string, 0, strpos($this->uri->uri_string, $segment)) . $segment;
+                  $is_active =  $url == $this->uri->uri_string;
+                  ?>
 
-            <li class="nav-item">
-              <a class="nav-link" href="<? echo base_url(); ?>sikasep/Keterangan">
-                <i class="ni ni-circle-08 text-pink"></i>
-                <span class="nav-link-text">Keterangan Kehadiran</span>
+                  <li class="breadcrumb-item <?php echo $is_active ? 'active': '' ?>">
+                    <?php if($is_active): ?>
+                      <?php echo ucfirst($segment) ?>
+                      <?php else: ?>
+                        <?php echo ucfirst($segment) ?></a>
+                      <?php endif; ?>
+                    </li>
+                  <?php endforeach; ?>
+              </ol>
+        </nav>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item dropdown">
+              <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <h6><?php echo $this->session->userdata('nama_user'); ?></h6>
+                &nbsp;
+                <!-- <span class="fa fa-user"></span> -->
+                <div></div>
+                <!-- <img style="max-height:40px;max-width:40px; border-radius: 50%; margin: auto;" src="<?php echo base_url("assets/admin/img/").$this->session->userdata('photo'); ?>"> -->
+                <!-- <span class="badge badge-primary">9</span>  -->
+                <span class="fa dropdown-toggle"></span>
               </a>
-            </li>
-              
-            <!-- <li class="nav-item">
-              <a class="nav-link" href="<? echo base_url(); ?>sikasep/">
-                <i class="ni ni-circle-08 text-pink"></i>
-                <span class="nav-link-text">Laporan</span>
-              </a>
-            </li> -->
-              
-          </ul>
-            
-          <!-- Divider -->
-          <hr class="my-3">
-          
-          <!-- Navigation -->
-          <ul class="navbar-nav mb-md-3">
-            
-            <li class="nav-item">
-                
-              <a class="nav-link active active-pro" href="<? echo base_url(); ?>sikasep/examples/upgrade.html">
-                <i class="ni ni-send text-dark"></i>
-                <span class="nav-link-text">Log Out</span>
-              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
             </li>
           </ul>
-            
         </div>
-      </div>
-    </div>
-  </nav>
+      </nav>

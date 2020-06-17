@@ -23,18 +23,33 @@ class Keterangan extends MY_Controller {
 	{
 		parent::__construct();
 		$this->load->model('m_dashboard');
+		$this->load->library('session');
+		
 	}
 
 	public function index()
-	{
+	{	
 		$data = array(
-        	    'title' => 'Keterangan Kehadiran Pegawai',
-			    'graph' => $this->m_dashboard->graph(),
-			    'total' => $this->db->get_where('tb_user', ['active'=>'1']),
+        	    'title' =>   'Keterangan Kehadiran Pegawai',
+			    'graph' => $this->m_dashboard->user_list(),
         );
-        $this->template->load('layout/template', 'keterangan/index', $data);
+
+
+        if ($this->session->userdata['logged_in']==true) {
+	       	 $this->template->load('layout/template', 'keterangan/index', $data);
+        }
+        else{
+			redirect('Login-User');
+        }
+
+      
 
 	}
+
+	function data_user(){
+        $data=$this->m_dashboard->user_list();
+        echo json_encode($data);
+    }
 
 
 }

@@ -28,11 +28,11 @@
           <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
             <li class="nav-item dropdown">
               <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <h6><?php echo $this->session->userdata('lastname'); ?></h6>
+                <h6><?php echo $this->session->userdata('nama_user'); ?></h6>
                 &nbsp;
                 <!-- <span class="fa fa-user"></span> -->
                 <div></div>
-                <img style="max-height:40px;max-width:40px; border-radius: 50%; margin: auto;" src="<?php echo base_url("assets/admin/img/").$this->session->userdata('photo'); ?>">
+                <!-- <img style="max-height:40px;max-width:40px; border-radius: 50%; margin: auto;" src="<?php echo base_url("assets/admin/img/").$this->session->userdata('photo'); ?>"> -->
                 <!-- <span class="badge badge-primary">9</span>  -->
                 <span class="fa dropdown-toggle"></span>
               </a>

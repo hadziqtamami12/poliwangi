@@ -50,6 +50,7 @@ class Auth extends MX_Controller {
 
         //ambil data dari database untuk validasi login
         $query = $this->Login_model->check_account($username, $password);
+        // $data = $this->Login_model->login($username, $password);
 
         if ($query === 1) {
             $this->session->set_flashdata('alert', '<p class="box-msg">
@@ -87,17 +88,17 @@ class Auth extends MX_Controller {
         } else {
             //membuat session dengan nama userData yang artinya nanti data ini bisa di ambil sesuai dengan data yang login
             $userdata = array(
-              'active'    => 1,
+              // 'active'    => 1,
             //   'id'          => $query->id,
               'id_user' =>  $query->id_user,
               'password'    => $query->password,
-              'id_role'     => $query->id_role,
+              'id_level_user'     => $query->id_level_user,
               'username'    => $query->username,
               // 'firstname'  => $query->firstname,
-              'lastname'   => $query->last_name,
+              'nama_user'   => $query->nama_user,
               // // 'username'       => $query->username,
               // 'phone'       => $query->phone,
-              'photo'       => $query->photo,
+              'level_user'       => $query->level_user,
               // 'created_on'  => $query->created_on,
               // 'last_login'  => $query->last_login
             );
@@ -125,7 +126,17 @@ class Auth extends MX_Controller {
                 $data = $this->Login_model->check_account($this->input->post('username'), $this->input->post('password'));
 
                 //jika bernilai TRUE maka alihkan halaman sesuai dengan level nya
-				if ($data->id_role == '1') {
+				if ($data->id_level_user == '1') {
+          $data_sesi = array(
+                        'user_login' => $user_login,
+                        'username' => $username,
+                        'logged_in' => true,
+                    );
+
+                    $this->session->set_userdata($data_sesi); 
+					redirect('admin/user');
+				}
+				elseif ($data->id_level_user  == '2') {
           $data_sesi = array(
                         'user_login' => $user_login,
                         'username' => $username,
@@ -135,20 +146,10 @@ class Auth extends MX_Controller {
                     $this->session->set_userdata($data_sesi); 
 					redirect('sikasep/dashboard');
 				}
-				elseif ($data->id_role  == '2') {
-          $data_sesi = array(
-                        'user_login' => $user_login,
-                        'username' => $username,
-                        'logged_in' => true,
-                    );
-
-                    $this->session->set_userdata($data_sesi); 
-					redirect('sikasep/dashboard');
-				}
-				elseif ($data->id_role  == '4') {
-					redirect('tes/index');
-				}
-			} else {
+				// elseif ($data->id_level_user  == '4') {
+				// 	redirect('tes/index');
+				// }
+			 else {
 				$this->template->load('layout/template', 'login/index', $data);
 			}
 		} else {
@@ -156,9 +157,10 @@ class Auth extends MX_Controller {
 			
 		}
 	}
+    }
 	public function logout()
 	{
-			$this->session->sess_destroy();
+      $this->session->set_userdata('logged_in', FALSE);
 			redirect('Login-User');
 	}
 

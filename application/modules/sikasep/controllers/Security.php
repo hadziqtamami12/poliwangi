@@ -30,7 +30,7 @@ class Security extends MY_Controller {
 		$data = array(
         	    'title'     =>   'Shift Security',
 			    'graph' => $this->m_security->graph(),
-			    'total' => $this->db->get_where('tb_user', ['active'=>'1']),
+			    // 'total' => $this->db->get_where('tb_user', ['active'=>'1']),
         );
         $this->template->load('layout/template', 'security/index', $data);
 
