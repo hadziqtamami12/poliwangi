@@ -1,7 +1,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark trans-navigation fixed-top navbar-togglable">
             <div class="container">
                 <a class="navbar-brand" href="index-3.html">
-                    <h3>Rapoo</h3>
+                    <h3>Poliwangi</h3>
                 </a>
                 <!-- Toggler -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,9 +31,10 @@
                                 </a>
                             </div>
                         </li>
+
                         <li class="nav-item ">
                             <a href="<?php echo base_url() ;?>Login-User" class="nav-link js-scroll-trigger">
-                                Sikasep
+                                SIRAPAT
                             </a>
                         </li>
                     </ul>

@@ -37,6 +37,7 @@ class User extends MY_Controller {
 			    // 'masuk' => $this->m_dashboard->jum_peg_masuk($tanggal_sekarang),
 			    // 'ijin' => $this->m_dashboard->jum_peg_ijin($tanggal_sekarang),
 			    'user' => $this->m_user->user_list(),
+			    'level_user' => $this->m_user->level_user_list(),
 			    // 'namahari' => date("l", strtotime('tb_presensi.tanggal_sekarang'))
 			    // 'namahari' => date("l")
 

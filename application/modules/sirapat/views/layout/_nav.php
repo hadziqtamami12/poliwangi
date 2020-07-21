@@ -1,11 +1,12 @@
 
-<nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
+
+<nav class="navbar navbar-top navbar-expand navbar-light bg-transparent border-bottom ">
       <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
         <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-1 mt-2">
-        <ol class="breadcrumb breadcrumb-links">
-        <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+        <ol class="breadcrumb breadcrumb-links bg-gradient-white">
+        <li class="breadcrumb-item" ><a href="#"><i class="fas fa-home"></i></a></li>
         
                 <!-- <li class="breadcrumb-item">Home</li>
                 <li class="breadcrumb-item active" aria-current="page">Data</li> -->
@@ -47,10 +48,10 @@
               <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="media align-items-center">
                   <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="<?= base_url('assets/'); ?>dashboard/img/default.jpg " >
+                    <img alt="Image placeholder" src="<?= base_url('assets/admin/img/profile/') . $user['foto']; ?>" >
                   </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
-                    <span class="mb-0 text-sm  font-weight-bold">Velanda Aden</span>
+                    <span class="mb-0 text-sm  text-primary font-weight-bold"><?= $user['nama'] ?></span>
                   </div>
                 </div>
               </a>
@@ -73,3 +74,4 @@
         </div>
       </div>
       </nav>
+     

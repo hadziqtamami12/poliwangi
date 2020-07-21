@@ -13,7 +13,7 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">AGENDA RAPAT</h5>
-                      <span class="h1 font-weight-bold mb-0">50</span>
+                      <span class="h1 font-weight-bold mb-0"></span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">

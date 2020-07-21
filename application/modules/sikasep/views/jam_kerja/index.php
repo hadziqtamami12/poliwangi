@@ -1,4 +1,7 @@
-<div class="container-main">
+<div class="container-fluid mt-5">
+          <div class="card">
+            <div class="card-body">
+
     <br>
     <h1>Edit Jam Kerja Pegawai</h1>
      <form action="<?php echo base_url(); ?>sikasep/Jam_Kerja/edit" method="post">
@@ -34,10 +37,15 @@
   <button type="submit" class="btn btn-primary">Perbarui</button>
 </form>
 
-  <div class="container" id="keterangan-jamkerja">
+</div></div>
+
+  <div class="container mt-5">
+            <div class="card">
+            <div class="card-body">
+
     <table border="0" cellpadding="3">
       <tr>
-        <td><h5><b>Keterangan</b></h5></td>       
+        <td><h1><b>Keterangan</b></h1></td>       
       </tr>
       <?php
               foreach($jam_kerja as $p) { ?>
@@ -53,4 +61,5 @@
     </table>
   </div>
 </div>
+</div></div>
 

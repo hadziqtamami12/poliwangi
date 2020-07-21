@@ -11,7 +11,7 @@
 
 	<!-- css -->
 	<?php require_once('_css.php') ;?>
-	<script src="<?php echo base_url('assets');?>/vendor/jquery/jquery.min.js"></script>
+	<script src="<?php echo base_url('assets'); ?>/vendor/jquery/jquery.min.js"></script>
 </head>
 
 

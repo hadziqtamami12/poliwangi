@@ -1,4 +1,4 @@
-    <div class="container">
+    <div class="container-fluid mt-5">
         <div class="page-content-wrapper">
             <div class="page-content">
                 <div class="alert notification" style="display: none;">
@@ -33,7 +33,7 @@
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                       <span aria-hidden="true">&times;</span>
                                                   </button>
-                                                  <h4 class="modal-title" id="myModalLabel">Create calendar event</h4>
+                                                  
                                               </div>
                                               <div class="modal-body">
 
@@ -65,8 +65,8 @@
                                             <div class="form-group">
                                                 <label class="control-label col-sm-2">Dari Tanggal</label>
                                                 <div class="col-sm-10">
-                                                    <div class="input-group input-medium date date-picker" data-date-format="yyyy-mm-dd" data-date-viewmode="years">
-                                                        <input type="date" name="start_date" class="form-control" readonly required="">
+                                                    <div data-provide="datepicker" class="input-group input-medium date datepicker" >
+                                                        <input type="date" name="start_date" class="form-control" required="">
                                                     </div>
                                                 </div>
                                             </div>
@@ -74,8 +74,8 @@
                                             <div class="form-group">
                                                 <label class="control-label col-sm-2">Sampai Tanggal</label>
                                                 <div class="col-sm-10">
-                                                    <div class="input-group input-medium date date-picker" data-date-format="yyyy-mm-dd" data-date-viewmode="years">
-                                                        <input type="date" name="end_date" class="form-control" readonly required="">
+                                                    <div data-provide="datepicker" class="input-group input-medium date datepicker">
+                                                        <input type="date" name="end_date" class="form-control" required="">
                                                     </div>
                                                 </div>
                                             </div>
@@ -83,7 +83,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <a href="javascript::void" class="btn default" data-dismiss="modal">Cancel</a>
-                                            <a class="btn btn-danger delete_calendar" style="display: none;">Delete</a>
+                                            <a class="btn btn-danger delete_calendar" style="display: none; color: white;">Delete</a>
                                             <button type="submit" class="btn green">Submit</button>
                                         </div>
                                     </form>
@@ -99,3 +99,4 @@
     </div>
 </div>
 </div>
+

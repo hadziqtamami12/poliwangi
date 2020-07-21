@@ -25,11 +25,8 @@
 
 		<!-- Main content -->
 		<?php require_once('_nav.php') ;?>
-
 			
-				<?php require_once('_header.php') ;?>
 				<?php echo $contents ;?>
-			
 		</div>
 
 		<!-- footer -->

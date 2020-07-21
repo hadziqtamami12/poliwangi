@@ -7,11 +7,10 @@ class m_dashboard extends CI_Model {
 		$this->load->database('db_poliwangi');
 		// $this->load->library('TanggalMerah');
 		date_default_timezone_set("Asia/Jakarta");
+
+
 	}
 
-	// private $tanggal_sekarang = '2020-05-01';
-
- 
 	
 
 	public function jum_peg_tidakmasuk($tanggal_sekarang)
@@ -20,19 +19,18 @@ class m_dashboard extends CI_Model {
 		// return $data->result();
 
 		// $hari_ini = date('l');
-		// $hari_ini = date('l', strtotime('tb_presensi.tanggal_sekarang'));
-		$this->db->select('*, count(tb_presensi.id_presensi) as jum_masuk');
-        $this->db->from('tb_rekap');
-        $this->db->join('tb_presensi', 'tb_rekap.id_presensi = tb_presensi.id_presensi');
-        $this->db->group_by('tb_presensi.tanggal_sekarang');
+		// $hari_ini = date('l', strtotime('tanggal_sekarang'));
+		$this->db->select('*, count(id_presensi) as jum_masuk');
+        $this->db->from('tb_presensi');
+        // $this->db->join('tb_presensi', 'id_presensi = id_presensi');
+        $this->db->group_by('tanggal_sekarang');
         // $this->db->join('tb_shift_security', 'tb_rekap.id_pegawai = tb_shift_security.id_pegawai');
-        // $this->db->group_by('tb_presensi.tanggal_sekarang');
-        // $this->db->order_by('tb_presensi.tanggal_sekarang','asc');
-        // $this->db->where('tb_presensi.jam_masuk', Null);
-        $this->db->where('tb_presensi.jam_masuk', Null);
-        $this->db->where('tb_presensi.ijin', 'tidak ada');
-        $this->db->where('tb_presensi.id_status_hari', Null);
-        $this->db->where('tb_presensi.tanggal_sekarang', $tanggal_sekarang);
+        // $this->db->group_by('tanggal_sekarang');
+        // $this->db->order_by('tanggal_sekarang','asc');
+        // $this->db->where('jam_masuk', Null);
+        $this->db->where('jam_masuk', Null);
+        // $this->db->where('id_status_hari', Null);
+        $this->db->where('tanggal_sekarang', $tanggal_sekarang);
         // $this->db->where($hari_ini.'!= Friday');
         // $this->db->where($hari_ini .' !=', 'Sunday');
         // $this->db->like('id_rekap',$cari);
@@ -48,21 +46,21 @@ class m_dashboard extends CI_Model {
 		// $hari_ini = date('l', strtotime($tanggal_sekarang));
 
 
-		$this->db->select('*, count(tb_presensi.id_presensi) as jum_masuk');
-        $this->db->from('tb_rekap');
-        $this->db->join('tb_presensi', 'tb_rekap.id_presensi = tb_presensi.id_presensi');
+		$this->db->select('*, count(id_presensi) as jum_masuk');
+        $this->db->from('tb_presensi');
+        // $this->db->join('tb_presensi', 'tb_rekap.id_presensi = id_presensi');
         // $this->db->join('tb_shift_security', 'tb_rekap.id_pegawai = tb_shift_security.id_pegawai');
-        // $this->db->group_by('tb_presensi.tanggal_sekarang');
-        $this->db->order_by('id_rekap','asc');
-        // $this->db->where('tb_presensi.jam_masuk != null OR tb_presensi.ijin = ada OR tb_presensi.id_status_hari = null');
-        $this->db->where("(tb_presensi.jam_masuk != '' OR tb_presensi.ijin = 'ada' OR tb_presensi.id_status_hari != '')", NULL, FALSE);
-        $this->db->group_by('tb_presensi.tanggal_sekarang');
-        $this->db->where('tb_presensi.tanggal_sekarang', $tanggal_sekarang);
-        // $this->db->where('tb_presensi.jam_masuk !=', NULL)
-        // ->or_where('tb_presensi.ijin', 'ada')
-        // ->or_where('tb_presensi.id_status_hari !=', NULL);
+        // $this->db->group_by('tanggal_sekarang');
+        $this->db->order_by('id_presensi','asc');
+        // $this->db->where('jam_masuk != null OR ijin = ada OR id_status_hari = null');
+        // $this->db->where("(jam_masuk != '' OR ijin = 'ada' OR id_status_hari != '')", NULL, FALSE);
+        $this->db->group_by('tanggal_sekarang');
+        $this->db->where('tanggal_sekarang', $tanggal_sekarang);
+        $this->db->where('jam_masuk !=', NULL);
+        // ->or_where('ijin', 'ada')
+        // ->or_where('id_status_hari !=', NULL);
         // ->or_where($this->TanggalMerah->is_sunday());
-        // $this->db->where('tb_presensi.id_status_hari !=', Null);
+        // $this->db->where('id_status_hari !=', Null);
         // $this->db->like('id_rekap',$cari);
         $data = $this->db->get();
 		return $data->result();
@@ -72,14 +70,14 @@ class m_dashboard extends CI_Model {
 	{
 		// $data = $this->db->get('tb_user');
 		// return $data->result();
-		$this->db->select('*, count(tb_presensi.id_presensi) as jum_masuk');
-        $this->db->from('tb_rekap');
-        $this->db->join('tb_presensi', 'tb_rekap.id_presensi = tb_presensi.id_presensi');
+		$this->db->select('*, count(id_presensi) as jum_masuk');
+        $this->db->from('tb_presensi');
+        // $this->db->join('tb_presensi', 'tb_rekap.id_presensi = id_presensi');
         // $this->db->join('tb_shift_security', 'tb_rekap.id_pegawai = tb_shift_security.id_pegawai');
         // $this->db->group_by('tb_rekap.id_pegawai');
-        $this->db->order_by('id_rekap','asc');
-        $this->db->where('tb_presensi.ijin', 'ada');
-        $this->db->where('tb_presensi.tanggal_sekarang', $tanggal_sekarang);
+        $this->db->order_by('id_presensi','asc');
+        $this->db->where('ijin', 'ada');
+        $this->db->where('tanggal_sekarang', $tanggal_sekarang);
         // $this->db->like('id_rekap',$cari);
         $data = $this->db->get();
 		return $data->result();
@@ -88,18 +86,109 @@ class m_dashboard extends CI_Model {
 	public function hari_ini($tanggal_sekarang)
 	{
 		$this->db->select('*');
-        $this->db->from('tb_rekap');
-        $this->db->join('tb_pegawai', 'tb_rekap.id_pegawai = tb_pegawai.id_pegawai');
-        $this->db->join('tb_jabatan', 'tb_rekap.id_jabatan = tb_jabatan.id_jabatan');
-        $this->db->join('tb_presensi', 'tb_rekap.id_presensi = tb_presensi.id_presensi');
+        $this->db->from('tb_presensi');
+        $this->db->join('tb_pegawai', 'tb_presensi.id_pegawai = tb_pegawai.id_pegawai');
+        $this->db->join('tb_jabatan', 'tb_pegawai.id_jabatan = tb_jabatan.id_jabatan');
         $this->db->join('tb_jam_kerja', 'tb_presensi.id_jam_kerja = tb_jam_kerja.id_jam_kerja');
+        $this->db->join('tb_jurusan', 'tb_pegawai.id_jurusan = tb_jurusan.id_jurusan');
         // $this->db->join('tb_shift_security', 'tb_rekap.id_pegawai = tb_shift_security.id_pegawai');
         // $this->db->group_by('tb_rekap.id_pegawai');
-        $this->db->order_by('tb_presensi.tanggal_sekarang','desc');
-        $this->db->order_by('tb_presensi.id_presensi','asc');
-        $this->db->where('tb_presensi.tanggal_sekarang', $tanggal_sekarang);
+        $this->db->order_by('tanggal_sekarang','desc');
+        $this->db->order_by('id_presensi','asc');
+        $this->db->where('tanggal_sekarang', $tanggal_sekarang);
         // $this->db->where('id_card',$cari);
         // $this->db->like('id_rekap',$cari);
+        $data = $this->db->get();
+		return $data->result();
+	}
+
+    public function ti($tanggal_sekarang)
+    {
+        $this->db->select('*');
+        $this->db->from('tb_presensi');
+        $this->db->join('tb_pegawai', 'tb_presensi.id_pegawai = tb_pegawai.id_pegawai');
+        $this->db->join('tb_jabatan', 'tb_pegawai.id_jabatan = tb_jabatan.id_jabatan');
+        $this->db->join('tb_jam_kerja', 'tb_presensi.id_jam_kerja = tb_jam_kerja.id_jam_kerja');
+        $this->db->join('tb_jurusan', 'tb_pegawai.id_jurusan = tb_jurusan.id_jurusan');
+        // $this->db->join('tb_shift_security', 'tb_rekap.id_pegawai = tb_shift_security.id_pegawai');
+        // $this->db->group_by('tb_rekap.id_pegawai');
+        $this->db->order_by('tanggal_sekarang','desc');
+        $this->db->order_by('id_presensi','asc');
+        $this->db->where('tanggal_sekarang', $tanggal_sekarang);
+        $this->db->where('jurusan', 'Teknik Informatika');
+        // $this->db->where('id_card',$cari);
+        // $this->db->like('id_rekap',$cari);
+        $data = $this->db->get();
+        return $data->result();
+    }
+
+    public function sipil($tanggal_sekarang)
+    {
+        $this->db->select('*');
+        $this->db->from('tb_presensi');
+        $this->db->join('tb_pegawai', 'tb_presensi.id_pegawai = tb_pegawai.id_pegawai');
+        $this->db->join('tb_jabatan', 'tb_pegawai.id_jabatan = tb_jabatan.id_jabatan');
+        $this->db->join('tb_jam_kerja', 'tb_presensi.id_jam_kerja = tb_jam_kerja.id_jam_kerja');
+        $this->db->join('tb_jurusan', 'tb_pegawai.id_jurusan = tb_jurusan.id_jurusan');
+        // $this->db->join('tb_shift_security', 'tb_rekap.id_pegawai = tb_shift_security.id_pegawai');
+        // $this->db->group_by('tb_rekap.id_pegawai');
+        $this->db->order_by('tanggal_sekarang','desc');
+        $this->db->order_by('id_presensi','asc');
+        $this->db->where('tanggal_sekarang', $tanggal_sekarang);
+        $this->db->where('jurusan', 'Teknik Sipil');
+        // $this->db->where('id_card',$cari);
+        // $this->db->like('id_rekap',$cari);
+        $data = $this->db->get();
+        return $data->result();
+    }
+
+	public function validasi($tanggal_sekarang)
+	{
+		$this->db->select('*');
+        $this->db->from('tb_validasi_rekap');
+        $this->db->order_by('id_validasi','desc');
+
+        $data = $this->db->get();
+		return $data->result();
+	}
+  
+  	public function add_data($data)
+    {
+        $data = $this->db->insert('tb_presensi2', $data);
+		return $data;
+    }
+
+    public function tes(){
+    	$this->db->select('*');
+        $this->db->from('tes');
+    	$data = $this->db->get();
+		return $data->result();
+    } 
+
+    function update_tes($where,$data,$table){
+		$this->db->where($where);
+		$this->db->update($table,$data);
+	}
+
+    public function insert_tes($data)
+    {
+        $data = $this->db->insert('tes', $data);
+		return $data;
+    }
+
+    public function validasi_add($data)
+    {
+        $data = $this->db->insert('tb_validasi_rekap', $data);
+		return $data;
+    }
+
+
+
+	public function jam_kerja()
+	{
+		$this->db->select('*');
+        $this->db->from('tb_jam_kerja');
+
         $data = $this->db->get();
 		return $data->result();
 	}

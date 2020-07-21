@@ -53,7 +53,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -78,7 +78,7 @@
                 <div class="form-group">
                     <label>Level User</label>
                     <select name="id_level_user" class="form-control id_level_user">
-                        <?php foreach($user as $p):?>
+                        <?php foreach($level_user as $p):?>
                         <option value="<?= $p->id_level_user;?>"><?= $p->level_user;?></option>
                         <?php endforeach;?>
                     </select>

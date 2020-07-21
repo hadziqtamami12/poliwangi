@@ -1,62 +1,170 @@
-  <!-- <script src="<?php base_url(); ?>../assets/admin/vendor/jquery/jquery.min.js"></script> -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <!-- <script type="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script> -->
-        <!-- <script type="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script> -->
-        <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
-  <script src="<?php base_url(); ?>../assets/admin/vendor/bootstrap/js/bootstrap.min.js"></script>
-  <script src="<?php base_url(); ?>../assets/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="<?= base_url('assets/'); ?>dashboard/vendor/jquery/dist/jquery.min.js"></script>
+  <script src="<?= base_url('assets/'); ?>dashboard/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Calendar -->
-        <!-- <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.3/moment.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.1.1/fullcalendar.min.js"></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/3.2.0/js/bootstrap-colorpicker.js"></script>
-        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/js/bootstrap-timepicker.js"></script> -->
-        <!-- <script src="<?php echo base_url(); ?>assets/admin/js/main.js"></script> -->
-  <!-- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script> -->
+
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+  <script src="<?= base_url('assets/'); ?>dashboard/vendor/js-cookie/js.cookie.js"></script>
+  <script src="<?= base_url('assets/'); ?>dashboard/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+  <!-- <script src="<?= base_url('assets/'); ?>dashboard/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script> -->
+  <!-- Optional JS -->
+  <!-- <script src="<?= base_url('assets/'); ?>dashboard/vendor/chart.js/dist/Chart.min.js"></script> -->
+  <!-- <script src="<?= base_url('assets/'); ?>dashboard/vendor/chart.js/dist/Chart.extension.js"></script> -->
+  <!-- Argon JS -->
+  <script src="<?= base_url('assets/'); ?>dashboard/js/argon.js?v=1.2.0"></script>
+  <!-- SweetAlert -->
+  <script src="<?= base_url('assets/'); ?>dashboard/dist/sweetalert2.min.js"></script>
+  
+  <!-- <script src="<?= base_url('assets/'); ?>dashboard/js/myscript.js"></script> -->
 
-  <!-- <script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script> -->
-  <!-- <script type="text/javascript" src="http://code.highcharts.com/modules/exporting.js"></script> -->
+
+
+<!-- <script src="<?= base_url('assets/'); ?>vendor/select2.js"></script> -->
+
+
+
 
 
   <script type="text/javascript">
     $(document).ready(function () {
 
+     $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+      });
 
       $('#myTable').DataTable({});
+      $('#myTableGolongan').DataTable({});
   
 
       $('#myTab a[href~="' + location.href + '"]').addClass('active');
 
 
 
+$('.btn-edit-golongan').on('click',function(){
+              // get data from button edit
+              const id_pegawai = $(this).data('id_pegawai');
+              // const nama_pegawai = $(this).data('nama_pegawai');
+              const jabatan = $(this).data('jabatan');
+              const level_golongan = $(this).data('level_golongan');
+              const jurusan = $(this).data('jurusan');
+              // Set data to Form Edit
+              $('.id_pegawai').val(id_pegawai);
+              // $('.nama_pegawai').val(nama_pegawai);
+              $('.jabatan').val(jabatan).trigger('change');
+              $('.level_golongan').val(level_golongan).trigger('change');
+              $('.jurusan').val(jurusan).trigger('change');
+              // Call Modal Edit
+              $('#editModalGolongan').modal('show');
+          });
+
+$('.btn-edit-security').on('click',function(){
+              // get data from button edit
+              const id_pegawai = $(this).data('id_pegawai');
+              const nama_pegawai = $(this).data('nama_pegawai');
+              // const nama_pegawai = $(this).data('nama_pegawai');
+              const keterangan_hari = $(this).data('keterangan_hari');
+              // Set data to Form Edit
+              $('.id_pegawai').val(id_pegawai);
+              $('.nama_pegawai').val(nama_pegawai);
+              $('.keterangan_hari').val(keterangan_hari).trigger('change');
+              // Call Modal Edit
+              $('#editModalSecurity').modal('show');
+          });
+
+
+$('.btn-edit-keterangan').on('click',function(){
+
+
+
+            //  $('.keterangan_telat').change(function() {
+            //     const x = $(this).val();
+            //     for (const i = 1; i <= x; i++) {
+            //         $(".keterangan_telat_file").show(); 
+            //     }
+            // });
+
+            // $('.keterangan_telat').change(function() {
+            //     if($(this).val()==="ada"){ 
+            //         // console.log('empty'); 
+            //          $(".keterangan_telat_file").show();   
+            //     } else {
+            //           $('.keterangan_telat_file').hide();
+            //     }
+            // });
+
+            // $('.keterangan_psw').change(function() {
+            //     if($(this).val()==="ada"){ 
+            //         // console.log('empty'); 
+            //          $(".keterangan_psw_file").show();   
+            //     } else {
+            //           $('.keterangan_psw_file').hide();
+            //     }
+            // });
+
+            // $('.ijin').change(function() {
+            //     if($(this).val()==="ada"){ 
+            //         // console.log('empty'); 
+            //          $(".ijin_file").show();   
+            //     } else {
+            //           $('.ijin_file').hide();
+            //     }
+            // });
+
+              // get data from button edit
+              const id_presensi = $(this).data('id_presensi');
+              const keterangan_telat = $(this).data('keterangan_telat');
+              const keterangan_psw = $(this).data('keterangan_psw');
+              const ijin = $(this).data('ijin');
+              // Set data to Form Edit
+              $('.id_presensi').val(id_presensi);
+              $('.keterangan_telat').val(keterangan_telat).trigger('change');
+              $('.keterangan_psw').val(keterangan_psw).trigger('change');
+              $('.ijin').val(ijin).trigger('change');
+
+
+              // $(".ijin").on('change' ,function(){
+                
+              // });
+              // Call Modal Edit
+              $('#editModalKeterangan').modal('show');
+
+              
+
+          });
+
 
     });
 
+
 function cari_golongan()
       {
-        sel_kota = $('[name="id_level_golongan"]');
+        golongan = $('[name="id_level_golongan"]');
         $.ajax({
           type : 'POST',
-          data: "cari="+1+"&id_level_golongan="+sel_kota.val(),
+          data: "cari="+1+"&id_level_golongan="+golongan.val(),
           url  : "<?php echo base_url('sikasep/Golongan/tampil_golongan');?>",
           cache: false,
-          beforeSend: function() {
-            sel_kota.attr('disabled', true);
-          },
+          // beforeSend: function() {
+          //   sel_kota.attr('disabled', true);
+          // },
           success: function(data){
-            sel_kota.attr('disabled', false);
-            $('#myTable').html(data);
+            $('#myTableGolongan').html(data);
+
+
           }
+
         });
        return false;
       }
 
   </script>
-
+<!-- calendar -->
 <script type="text/javascript">
         var get_data        = '<?php echo $get_data; ?>';
         var backend_url     = '<?php echo base_url(); ?>sikasep/Status_Hari';
@@ -70,7 +178,7 @@ function cari_golongan()
                     center: 'title',
                     right: 'month,basicWeek,basicDay'
                 },
-                titleFormat : moment().format('MMM YYYY'),
+                titleFormat : { year: 'numeric'},
                 defaultDate: moment().format('YYYY-MM-DD'),
                 editable: true,
                 eventLimit: true, // allow "more" link when too many events
@@ -304,7 +412,7 @@ function cari_golongan()
         {
             $('#create_modal .delete_calendar').click(function(){
                 $.ajax({
-                    url     : '<?php echo base_url(); ?>sikasep/Status_Hari/delete_dataf',
+                    url     : '<?php echo base_url(); ?>sikasep/Status_Hari/delete_data',
                     type    : 'POST',
                     data    : 'id='+event.id,
                     dataType: 'JSON',
@@ -339,6 +447,7 @@ function cari_golongan()
 
 
     </script>
+
 
 
 

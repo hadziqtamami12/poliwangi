@@ -11,5 +11,10 @@ class m_dashboard extends CI_Model {
 		$data = $this->db->get('user');
 		return $data->result();
 	}
+
+	public function ambil_data($id){
+		$this->db->where('email', $id);
+		return $this->db->get('user');
+	}
  
 }

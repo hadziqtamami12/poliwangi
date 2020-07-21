@@ -1,39 +1,49 @@
-<!--  <div class="row">
-          <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6">
-            <div id="pie-chart"></div>
-          </div>
-          <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6">
-            <div id="pie-chart2"></div>
-          </div>
-      </div> -->
+<script type="text/javascript">
+
+
+setInterval(myTimer, 60000);
+
+  var d = 'tes';
+  var a = new Date();
+  detik = a.getSeconds();
+  menit = a.getMinutes();
+  jam = a.getHours();
+  var date = jam + ':' + menit + ':' + detik;
+  var datanya = '';
+  // var x = parseInt((detik).toString());
+
+function myTimer() {
+
+
+  if (parseInt(jam.toString()) > 7 && parseInt(jam.toString()) < 16) {
+
+    window.location.href = "<?php echo base_url('sikasep/Dashboard/tes_insert');?>";
+
+    
+  }
+}
+</script>
+
+
+<!-- <p id="demo"></p> -->
       <div class="card-info p-4">
 
             <div class="card-info-item">
                 <span class="fal fa-signal-alt-3 fa-4x"></span>
                 <div class="info-data">
-                  <h6>Pegawai Tidak Masuk</h6>
-                  <h3><?php 
-foreach($tidakmasuk as $q){
+                  <h4>Pegawai Tidak Masuk</h4>
+                  <h1>
+                    <?php 
+                    $x = 0;
+                      foreach($tidakmasuk as $q):
+                          if (isset($q->jum_masuk)) {
+                            $x = $q->jum_masuk;
+                          }
+                        endforeach;
 
-             switch ($namahari) {
-                            case 'Saturday':
-                                $q->jum_masuk--;
-                                break;
-                            case 'Sunday':
-                                $q->jum_masuk--;
-                                break;
-                            
-                            default:
-                                $q->jum_masuk = $q->jum_masuk;
-                                break;
-                        }  
-                  if ($q->jum_masuk == 0) {
-                      echo "0";
-                  }else{
-                     echo $q->jum_masuk;
-                  } 
-              }
-                  ?></h3>
+                        echo $x;
+                    ?>
+                  </h1>
               </div>
           </div>
 
@@ -43,29 +53,19 @@ foreach($tidakmasuk as $q){
             <div class="card-info-item">
                 <span class="fal fa-signal-alt-3 fa-4x"></span>
                 <div class="info-data">
-                  <h6>Pegawai  Masuk</h6>
-                  <h3><?php 
-foreach($masuk as $q){
+                  <h4>Pegawai  Masuk</h4>
+                  <h1>
+                    <?php 
+                    $x = 0;
+                      foreach($masuk as $q):
+                          if (isset($q->jum_masuk)) {
+                            $x = $q->jum_masuk;
+                          }
+                        endforeach;
 
-             switch ($namahari) {
-                            case 'Saturday':
-                                $q->jum_masuk++;
-                                break;
-                            case 'Sunday':
-                                $q->jum_masuk++;
-                                break;
-                            
-                            default:
-                                $q->jum_masuk = $q->jum_masuk;
-                                break;
-                        }  
-                  if ($q->jum_masuk == 0) {
-                      echo "0";
-                  }else{
-                     echo $q->jum_masuk;
-                  } 
-              }
-                  ?></h3>
+                        echo $x;
+                    ?>
+                  </h1>
               </div>
           </div>
 
@@ -73,37 +73,56 @@ foreach($masuk as $q){
             <div class="card-info-item">
                 <span class="fal fa-signal-alt-3 fa-4x"></span>
                 <div class="info-data">
-                  <h6>Pegawai ijin</h6>
-                  <h3><?php 
-foreach($ijin as $q){
-  
-                  if ($q->jum_masuk == 0) {
-                      echo "";
-                  }else{
-                     echo $q->jum_masuk;
-                  } 
-              }
-                  ?></h3>
+                  <h4>Pegawai ijin</h4>
+                  <h1>
+                    <?php 
+                      foreach($ijin as $q):
+                        echo $q->jum_masuk;
+                        endforeach;
+                    ?>
+                  </h1>
               </div>
           </div>
 
 
-</div>  
+</div> 
 
 
+<div class="container-fluid mt-5">
 
+<?php if ($this->session->userdata('id_level_user') == 2): ?>
+<a class="btn btn-success" href="<?php echo base_url(); ?>sikasep/Dashboard/export_data"> <i class="fa fa-download"></i> Download </a>
+<?php endif; ?>
+<?php if ($this->session->userdata('id_level_user') == 2): 
+      $bg = 'btn btn-danger';
+      $pesan = 'Belum Divalidasi';
+      foreach ($validasi as $p):
+        if ($p->status == 'tervalidasi'):
+          $bg = 'btn btn-info';
+          $pesan = 'Sudah Tervalidasi';
+        endif;
+      endforeach;
+?>
+<a class="<?php echo $bg ?>" href="<?php echo base_url(); ?>sikasep/Dashboard/validasi" title="<?php echo $pesan; ?>"> <i class="fa fa-check"></i> Validasi </a>
+<?php  
+  endif;
+?>
+<?php if ($this->session->userdata('id_level_user') == 3):
+      foreach ($validasi as $p):
+        if ($p->status == 'tervalidasi' and $p->tanggal == date('Y-m-d')):
+ ?>
+<a class="btn btn-success" href="<?php echo base_url(); ?>sikasep/Dashboard/export_data"> <i class="fa fa-download"></i> Download </a>
+<?php 
+    endif; 
+    endforeach; 
+    endif; 
+?>
+<!-- <a class="btn btn-success" href="<?php echo base_url(); ?>sikasep/Dashboard/telegram_bot"> <i class="fa fa-download"></i> Tele tes </a> -->
+        <div class="card">
+            <div class="card-body">
 
-
-
-
-
-
-<div class="container-main">
-
-
-    <!-- table -->
-    <table class="table table-bordered table-striped" id="myTable">
-        <thead class="thead-dark">
+            <table class="table table-hover table-responsive" id="myTable">
+            <thead>
             <tr>
                 <th>No</th>
                 <th>Nama</th>
@@ -122,24 +141,24 @@ foreach($ijin as $q){
           <?php
           $no = 1;
           foreach($dashboard as $p){
-            if (strtotime($p->jam_masuk) - strtotime($p->jam_masuk_kerja) > 0) {
-                $telat = strtotime($p->jam_masuk) - strtotime($p->jam_masuk_kerja);
-                $telat = $telat / 60 . ' menit';
-            }
-            if (strtotime($p->jam_masuk) - strtotime($p->jam_masuk_kerja) <= 0) {
-                $telat = '-';
-            }
-            if (strtotime($p->jam_pulang) - strtotime($p->jam_pulang_kerja) < 0) {
-                $psw   = strtotime($p->jam_pulang) - strtotime($p->jam_pulang_kerja);
-                $psw = $psw / -60 . ' menit';
-            }
-            if (strtotime($p->jam_pulang) - strtotime($p->jam_pulang_kerja) >= 0) {
-                $psw = '-';
-            }
-            if ($p->jam_masuk == Null || $p->jam_pulang == Null) {
-                $telat = "Absen woy";
-                $psw = "Absen woy";
-            }
+            // if (strtotime($p->jam_masuk) - strtotime($p->jam_masuk_kerja) > 0) {
+            //     $telat = strtotime($p->jam_masuk) - strtotime($p->jam_masuk_kerja);
+            //     $telat = $telat / 60 . ' menit';
+            // }
+            // if (strtotime($p->jam_masuk) - strtotime($p->jam_masuk_kerja) <= 0) {
+            //     $telat = '-';
+            // }
+            // if (strtotime($p->jam_pulang) - strtotime($p->jam_pulang_kerja) < 0) {
+            //     $psw   = strtotime($p->jam_pulang) - strtotime($p->jam_pulang_kerja);
+            //     $psw = $psw / -60 . ' menit';
+            // }
+            // if (strtotime($p->jam_pulang) - strtotime($p->jam_pulang_kerja) >= 0) {
+            //     $psw = '-';
+            // }
+            // if ($p->jam_masuk == Null || $p->jam_pulang == Null) {
+            //     $telat = "Absen woy";
+            //     $psw = "Absen woy";
+            // }
 
             ?>
             <tr>
@@ -162,31 +181,44 @@ foreach($ijin as $q){
                     }
 
                 ?></td> 
-                <td><?php echo $telat;   ?></td> 
-                <td><?php echo $psw;   ?></td> 
+                <td><?php echo $p->telat;   ?></td> 
+                <td><?php echo $p->psw;   ?></td> 
                 <td><?php echo $p->ijin;   ?></td> 
-                <td><?php 
-                                    //kondisi hari kerja
-                if ($p->jam_masuk == Null) {
-                    if ($p->id_status_hari == Null && $p->ijin == 'tidak ada') {
-                        if ($namahari == 'Friday' || $namahari == 'Sunday') {
-                            echo "Sabtu/Minggu";
-                        }
-                        else{
-                            echo "Tidak Masuk";
-                        }
+                <td>
+                  <?php 
+                    
+                    if (isset($p->jam_masuk)) {
+                      echo "Masuk";
                     }
-                    elseif ($p->id_status_hari != Null || $p->ijin == 'ada'){
-                        echo "Masuk";
+                    elseif($p->ijin == 'ada') {
+                        echo "Ijin";
                     }
                     else{
-                        echo 'Tidak Masuk';
+                      echo "Tidak Masuk";
                     }
-                }
-                else {
-                    echo "Masuk";
-                }
-                ?></td>
+                    //kondisi hari kerja
+                    // if ($p->jam_masuk == Null) {
+                    //     if ($p->id_status_hari == Null && $p->ijin == 'tidak ada') {
+                    //         if ($namahari == 'Saturday' || $namahari == 'Sunday') {
+                    //             echo "Sabtu/Minggu";
+                    //         }
+                    //         else{
+                    //             echo "Tidak Masuk";
+                    //         }
+                    //     }
+                    //     elseif ($p->id_status_hari != Null || $p->ijin == 'ada'){
+                    //         echo "Masuk";
+                    //     }
+                    //     else{
+                    //         echo 'Tidak Masuk';
+                    //     }
+                    // }
+                    // else {
+                    //     echo "Masuk";
+                    // }
+                  ?>
+                  
+                </td>
 
 
             </tr>
@@ -197,6 +229,11 @@ foreach($ijin as $q){
 </table>
 
 </div>
+</div>
+</div>
+</div>
+
+
 
 
 

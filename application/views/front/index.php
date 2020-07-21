@@ -9,17 +9,17 @@
                    <div class="banner-content text-center style-2">
                         <!-- Heading -->
                         <h1 class="display-4 mb-4 ">
-                            Industry Leading Managed Services Solutions
+                           Sistem Informasi Manajemen
                         </h1>
 
                         <!-- Subheading -->
                         <p class="lead mb-5 pr-0">
-                            Pindom is set of landing and support pages aimed at helping companies promote new products and business launches.
+                            Politeknik Negeri Banyuwangi
                         </p>
 
                         <!-- Button -->
                         <a href="#" target="_blank" class="btn btn-primary btn-circled">
-                                Purchase now
+                                Masuk
                         </a>
                     </div>
                 </div>
