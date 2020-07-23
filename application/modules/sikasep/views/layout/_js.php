@@ -107,14 +107,14 @@ $('.btn-edit-keterangan').on('click',function(){
             //     }
             // });
 
-            // $('.ijin').change(function() {
-            //     if($(this).val()==="ada"){ 
-            //         // console.log('empty'); 
-            //          $(".ijin_file").show();   
-            //     } else {
-            //           $('.ijin_file').hide();
-            //     }
-            // });
+            $('.ijin').change(function() {
+                if($(this).val()==="ada"){ 
+                    // console.log('empty'); 
+                     $(".ijin_file").show();   
+                } else {
+                      $('.ijin_file').hide();
+                }
+            });
 
               // get data from button edit
               const id_presensi = $(this).data('id_presensi');

@@ -57,6 +57,9 @@ class Dashboard extends MY_Controller {
 
 		foreach($data['dashboard'] as $p){
 
+			$p->jam_masuk = date('H:i:s', strtotime($p->jam_masuk));
+			$p->jam_pulang = date('H:i:s', strtotime($p->jam_pulang));
+
 			if (strtotime($p->jam_masuk) - strtotime($p->jam_masuk_kerja) > 0) {
 				$p->telat = strtotime($p->jam_masuk) - strtotime($p->jam_masuk_kerja);
 				$p->telat = $p->telat / 60 . ' menit';
@@ -66,14 +69,14 @@ class Dashboard extends MY_Controller {
 			}
 			if (strtotime($p->jam_pulang) - strtotime($p->jam_pulang_kerja) < 0) {
 				$p->psw   = strtotime($p->jam_pulang) - strtotime($p->jam_pulang_kerja);
-				$p->psw = $p->psw / -60 . ' menit';
+				$p->psw = $p->psw / 60 . ' menit';
 			}
 			if (strtotime($p->jam_pulang) - strtotime($p->jam_pulang_kerja) >= 0) {
 				$p->psw = '-';
 			}
-			if ($p->jam_masuk == Null || $p->jam_pulang == Null) {
-				$p->telat = "Absen woy";
-				$p->psw = "Absen woy";
+			if ($p->jam_masuk == '00:00:00' || $p->jam_pulang == '00:00:00') {
+				$p->telat = "-";
+				$p->psw = "-";
 			}
 
 		}
@@ -487,6 +490,9 @@ class Dashboard extends MY_Controller {
 		$nomor = 1;
 		foreach($download as $p) {
 
+			$p->jam_masuk = date('H:i:s', strtotime($p->jam_masuk));
+			$p->jam_pulang = date('H:i:s', strtotime($p->jam_pulang));
+
 			if (strtotime($p->jam_masuk) - strtotime($p->jam_masuk_kerja) > 0) {
 				$p->telat = strtotime($p->jam_masuk) - strtotime($p->jam_masuk_kerja);
 				$p->telat = $p->telat / 60 . ' menit';
@@ -496,16 +502,14 @@ class Dashboard extends MY_Controller {
 			}
 			if (strtotime($p->jam_pulang) - strtotime($p->jam_pulang_kerja) < 0) {
 				$p->psw   = strtotime($p->jam_pulang) - strtotime($p->jam_pulang_kerja);
-				$p->psw = $p->psw / -60 . ' menit';
+				$p->psw = $p->psw / 60 . ' menit';
 			}
 			if (strtotime($p->jam_pulang) - strtotime($p->jam_pulang_kerja) >= 0) {
 				$p->psw = '-';
 			}
-			if ($p->jam_masuk == Null || $p->jam_pulang == Null) {
+			if ($p->jam_masuk == '00:00:00' || $p->jam_pulang == '00:00:00') {
 				$p->telat = "Absen woy";
 				$p->psw = "Absen woy";
-				$p->jam_masuk = '-';
-				$p->jam_pulang = '-';
 			}
 
 

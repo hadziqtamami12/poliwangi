@@ -27,9 +27,8 @@ class m_dashboard extends CI_Model {
         // $this->db->join('tb_shift_security', 'tb_rekap.id_pegawai = tb_shift_security.id_pegawai');
         // $this->db->group_by('tanggal_sekarang');
         // $this->db->order_by('tanggal_sekarang','asc');
-        // $this->db->where('jam_masuk', Null);
-        $this->db->where('jam_masuk', Null);
-        // $this->db->where('id_status_hari', Null);
+        $this->db->where('jam_masuk', '0000-00-00 00:00:00');
+        $this->db->where('ijin', 'tidak ada');
         $this->db->where('tanggal_sekarang', $tanggal_sekarang);
         // $this->db->where($hari_ini.'!= Friday');
         // $this->db->where($hari_ini .' !=', 'Sunday');
@@ -56,7 +55,7 @@ class m_dashboard extends CI_Model {
         // $this->db->where("(jam_masuk != '' OR ijin = 'ada' OR id_status_hari != '')", NULL, FALSE);
         $this->db->group_by('tanggal_sekarang');
         $this->db->where('tanggal_sekarang', $tanggal_sekarang);
-        $this->db->where('jam_masuk !=', NULL);
+        $this->db->where('jam_masuk !=', '0000-00-00 00:00:00');
         // ->or_where('ijin', 'ada')
         // ->or_where('id_status_hari !=', NULL);
         // ->or_where($this->TanggalMerah->is_sunday());

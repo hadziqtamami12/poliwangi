@@ -64,7 +64,13 @@ class Golongan extends MY_Controller {
 				$data['f_golongan']	 = $this->m_golongan->all();
 			}
 		 	
-		       	 $this->load->view('golongan/tabel_data', $data);
+		    if ($this->session->userdata['logged_in']==true) {
+		       	 $this->template->load('layout/template', 'golongan/tabel_data', $data);
+
+	        }
+	        else{
+				redirect('Login-User');
+	        }
 
 			
 		}

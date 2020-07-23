@@ -73,7 +73,11 @@
                                     echo $total_semua = $total - $p->pajak;
                                  ?></td>
                                 <!-- <td><?php echo $p->keterangan; ?></td> -->
-
+                                <td>
+                                    <a href="<?= base_url('sikasep/Rekap/detaiil_rekap_pegawai/'.$p->id_pegawai);?>">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                </td>
 
                             </tr>
                         <?php } ?>

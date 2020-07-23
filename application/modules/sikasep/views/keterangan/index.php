@@ -96,7 +96,7 @@
                         <option value="tidak ada">Tidak Ada</option>
                         <option value="ada" class="ijin_ada">Ada
                         </option>
-                            <!-- <input type="file" name="ijin_file" class="ijin_file"> -->
+                            <input type="file" name="lampiran" id="lampiran" class="ijin_file">
                     </select>
                 </div>
              

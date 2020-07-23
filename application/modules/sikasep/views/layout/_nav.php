@@ -28,7 +28,7 @@
         </nav>
 
         <!-- Navbar links -->
-        <ul class="navbar-nav align-items-center  ml-md-auto ">
+        <ul class="navbar-nav align-items-center  ml-md-auto ml-sm-auto bg-dark ">
             <li class="nav-item d-xl-none">
               <!-- Sidenav toggler -->
               <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin" data-target="#sidenav-main">

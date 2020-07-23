@@ -32,17 +32,18 @@ class Keterangan extends MY_Controller {
 	{	
 
 		// $tanggal_sekarang = date('Y-m-d');
-		
+		$id_presensi = 1;
+		$datapeg = array('pegawai' => $this->m_keterangan->keterangan_list_pegawai($id_presensi));
+		// $nama_pegawai = $datapeg['id_pegawai'];
+
+		echo "<pre>";
+		echo $datapeg['pegawai'];
+		echo "<pre>";
+
 
 		$data = array(
 			'title' =>   'Keterangan ijin',
-			    // 'tidakmasuk' => $this->m_dashboard->jum_peg_tidakmasuk($tanggal_sekarang),
-			    // 'masuk' => $this->m_dashboard->jum_peg_masuk($tanggal_sekarang),
-			    // 'ijin' => $this->m_dashboard->jum_peg_ijin($tanggal_sekarang),
 			'keterangan' => $this->m_keterangan->keterangan_list(),
-			    // 'namahari' => date("l", strtotime('tb_presensi.tanggal_sekarang'))
-			    // 'namahari' => date("l")
-
 		);
 
 
@@ -86,6 +87,9 @@ class Keterangan extends MY_Controller {
 		$keterangan_psw = $this->input->post('keterangan_psw');
 		$ijin = $this->input->post('ijin');
 		$id_presensi = $this->input->post('id_presensi');
+		$tanggal_sekarang = date('Y-m-d');
+		// $datapeg = $this->m_keterangan->keterangan_list_pegawai($id_presensi);
+		// $nama_pegawai = $datapeg['id_pegawai'];
 
 		$where = array('id_presensi' => $id_presensi);
 		$data = array(
@@ -93,11 +97,22 @@ class Keterangan extends MY_Controller {
 			'keterangan_psw' => $keterangan_psw,
 			'ijin' => $ijin,
 		);
-		// if (!empty($_FILES['ijin_file']['name'])) {
-		// 	$this->_upload();
-		// }
-	 	// $this->_upload($id_presensi);
-		$this->m_keterangan->update_data($where,$data,'tb_presensi');
+
+		
+		$lampiran = $_FILES['lampiran']['name'];
+       	$extension  = ".".pathinfo($lampiran, PATHINFO_EXTENSION);
+
+		if($lampiran):
+			$config['allowed_types'] = 'doc|xls|pdf';
+			$config['max_size'] = '51200';
+			$config['upload_path'] = './assets/dashboard/file-sikasep/';
+			$config['file_name'] = $nama_pegawai.'Ijin '.$tanggal_sekarang.$extension;
+			$this->load->library('upload', $config);
+
+			if($this->upload->do_upload('lampiran')):
+			endif;
+		endif;
+			$this->m_keterangan->update_data($where,$data,'tb_presensi');
 		redirect('sikasep/keterangan');
 
 	}

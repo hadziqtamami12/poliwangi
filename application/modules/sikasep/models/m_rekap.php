@@ -22,13 +22,13 @@ class m_rekap extends CI_Model {
         // $this->db->where('id_card',$cari);
         // $this->db->like('id_rekap',$cari);
         $data = $this->db->get();
-                return $data->result();
+        return $data->result();
         }
 
 	public function rekap_list()
 	{
         
-        $this->db->select('*, count(id_presensi) as total_hadir');
+        $this->db->select('*');
         $this->db->from('tb_presensi');
         $this->db->join('tb_pegawai', 'tb_presensi.id_pegawai = tb_pegawai.id_pegawai');
         $this->db->join('tb_jabatan', 'tb_pegawai.id_jabatan = tb_jabatan.id_jabatan');
@@ -40,8 +40,37 @@ class m_rekap extends CI_Model {
         // $this->db->where('id_card',$cari);
         // $this->db->like('id_rekap',$cari);
         $data = $this->db->get();
-		return $data->result();
+	return $data->result();
 	}
+
+        public function detail_rekap_pegawai($id_pegawai)
+        {
+        
+        $this->db->select('*');
+        $this->db->from('tb_presensi');
+        $this->db->join('tb_pegawai', 'tb_presensi.id_pegawai = tb_pegawai.id_pegawai');
+        $this->db->join('tb_jabatan', 'tb_pegawai.id_jabatan = tb_jabatan.id_jabatan');
+        $this->db->join('tb_level_golongan', 'tb_pegawai.id_level_golongan = tb_level_golongan.id_level_golongan');
+        $this->db->join('tb_jam_kerja', 'tb_presensi.id_jam_kerja = tb_jam_kerja.id_jam_kerja');
+        // $this->db->join('tb_presensi', 'tb_presensi.id_presensi = id_presensi');
+        $this->db->where('tb_presensi.id_pegawai', $id_pegawai);
+        // $this->db->where('id_card',$cari);
+        // $this->db->like('id_rekap',$cari);
+        $data = $this->db->get();
+        return $data->result();
+        }
+
+        public function detail_pegawai($id_pegawai)
+        {
+        
+        $this->db->select('*');
+        $this->db->from('tb_pegawai');
+        $this->db->join('tb_jabatan', 'tb_pegawai.id_jabatan = tb_jabatan.id_jabatan');
+        $this->db->join('tb_level_golongan', 'tb_pegawai.id_level_golongan = tb_level_golongan.id_level_golongan');
+        $this->db->where('tb_pegawai.id_pegawai', $id_pegawai);
+        $data = $this->db->get();
+        return $data->result();
+        }
 
         // public function data_uang_makan()
         // {
