@@ -39,6 +39,7 @@ class Rekap extends MY_Controller {
 	{	
 
 		$tanggal_sekarang = date('Y-m-d');
+      	//$tanggal_sekarang = date('2020-07-31');
 		$data = array(
 			'title' =>   'Rekap',
 			'rekap' => $this->m_rekap->rekap_list(),
@@ -119,7 +120,7 @@ class Rekap extends MY_Controller {
 		endif;
 	}
 
-	public function detaiil_rekap_pegawai($id_pegawai)
+	public function detail_rekap_pegawai($id_pegawai)
 	{	
 		// $id_pegawai = $this->input->post('id_pegawai');
 		$data = array(
@@ -144,14 +145,34 @@ class Rekap extends MY_Controller {
 			}
 			if (strtotime($p->jam_pulang) - strtotime($p->jam_pulang_kerja) < 0) {
 				$p->psw   = strtotime($p->jam_pulang) - strtotime($p->jam_pulang_kerja);
-				$p->psw = $p->psw / 60 . ' menit';
+				$p->psw = $p->psw / -60 . ' menit';
 			}
 			if (strtotime($p->jam_pulang) - strtotime($p->jam_pulang_kerja) >= 0) {
 				$p->psw = '-';
 			}
 			if ($p->jam_masuk == '00:00:00' || $p->jam_pulang == '00:00:00') {
-				$p->telat = "Absen woy";
-				$p->psw = "Absen woy";
+				$p->telat = "-";
+				$p->psw = "-";
+			}
+			
+			if ($p->jam_masuk != '00:00:00'){
+				$p->status = "Masuk";
+			}
+			if($p->jam_masuk == '00:00:00'){
+				
+				if ($p->id_status_hari != 0){
+					$p->status = "Libur ".$data['namaharilibur']['title'];
+				}		
+				elseif ($p->ijin == 'ada'){
+					$p->status = "Ijin";
+				}
+				elseif (date('D')=='Sun'){
+					$p->status = "Sabtu/Minggu";
+				}
+				else{                 
+					$p->status = "Tidak Masuk";
+				}
+				
 			}
 
 		}
@@ -163,6 +184,72 @@ class Rekap extends MY_Controller {
 			redirect('Login-User');
 		endif;
 	}
+  
+  	public function detail_pegawai($id_pegawai)
+	{	
+		// $id_pegawai = $this->input->post('id_pegawai');
+		$data = array(
+			'title' => 'Laporan Rekap Pegawai',
+			'detail' => $this->m_rekap->detail_rekap_pegawai($id_pegawai),
+		);
+
+		$data['dPegawai'] = $this->m_rekap->detail_pegawai($id_pegawai);
+
+
+		foreach($data['detail'] as $p){
+
+			$p->jam_masuk = date('H:i:s', strtotime($p->jam_masuk));
+			$p->jam_pulang = date('H:i:s', strtotime($p->jam_pulang));
+
+			if (strtotime($p->jam_masuk) - strtotime($p->jam_masuk_kerja) > 0) {
+				$p->telat = strtotime($p->jam_masuk) - strtotime($p->jam_masuk_kerja);
+				$p->telat = $p->telat / 60 . ' menit';
+			}
+			if (strtotime($p->jam_masuk) - strtotime($p->jam_masuk_kerja) <= 0) {
+				$p->telat = '-';
+			}
+			if (strtotime($p->jam_pulang) - strtotime($p->jam_pulang_kerja) < 0) {
+				$p->psw   = strtotime($p->jam_pulang) - strtotime($p->jam_pulang_kerja);
+				$p->psw = $p->psw / -60 . ' menit';
+			}
+			if (strtotime($p->jam_pulang) - strtotime($p->jam_pulang_kerja) >= 0) {
+				$p->psw = '-';
+			}
+			if ($p->jam_masuk == '00:00:00' || $p->jam_pulang == '00:00:00') {
+				$p->telat = "-";
+				$p->psw = "-";
+			}
+			
+			if ($p->jam_masuk != '00:00:00'){
+				$p->status = "Masuk";
+			}
+			if($p->jam_masuk == '00:00:00'){
+				
+				if ($p->id_status_hari != 0){
+					$p->status = "Libur ".$data['namaharilibur']['title'];
+				}		
+				elseif ($p->ijin == 'ada'){
+					$p->status = "Ijin";
+				}
+				elseif (date('D')=='Sun'){
+					$p->status = "Sabtu/Minggu";
+				}
+				else{                 
+					$p->status = "Tidak Masuk";
+				}
+				
+			}
+
+		}
+
+		if ($this->session->userdata['logged_in']==true):
+			$this->template->load('layout/template', 'pegawai/index', $data);
+
+		else:
+			redirect('Login-User');
+		endif;
+	}
+
 
 
 	public function kirim_laporan()
@@ -178,8 +265,16 @@ class Rekap extends MY_Controller {
 			redirect('Login-User');
 		endif;
 	}
+  
+  	public function laporan_tele()
+    {
+      $d = strtotime("-1 Months");
+  	  $bulan = date("M-Y", $d);
+      $this->telegram_lib->sendmsg('Tunjangan uang makan bulan '.$bulan. ' telah dikirim');
+    }
 
-	public function kirim_laporan_rekap(){
+	public function kirim_laporan_rekap()
+    {
 
 		$bulanini = date('M');
 
@@ -232,30 +327,6 @@ class Rekap extends MY_Controller {
 
 	}
 
-	public function tele($nama_dokumen){
-
-		$bulanini = date('M');
-		try {
-			$this->telegram_lib->senddoc($nama_dokumen);
-
-
-			if ($this->telegram_lib->senddoc($config['upload_path'].$config['file_name'], "no caption")):
-				$this->session->set_flashdata('message', 
-					'<div class="alert alert-success" role="alert">Laporan rekap telah dikirim</div>');
-			endif;
-
-
-			redirect('sikasep/Rekap/kirim_laporan');
-
-		} catch (Exception $e) {
-			$this->session->set_flashdata('message', 
-				'<div class="alert alert-danger" role="alert">Laporan rekap gagal dikirim</div>');
-		}
-	}
-
-
-
-	
 
 	
 

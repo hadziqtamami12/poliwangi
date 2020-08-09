@@ -43,41 +43,21 @@ class Jurusan extends MY_Controller {
 
 	
 
-	public function ti(){
+	public function index(){
+
 		$hari_ini = date('Y-m-d');
+		$bulan_ini = date('-1 month', strtotime($hari_ini));
 		$data = array(
-
-			'title' => 'Laporan kehadiran TI',
-			'ti' => $this->m_dashboard->ti($hari_ini),
-
+			'title' => 'Grafik Laporan Kehadiran Pegawai Poliwangi',
+      'bulan' => $this->m_dashboard->bulan($hari_ini, $bulan_ini),
+      // 'jurusan' => $this->m_dashboard->jurusan($hari_ini, $bulan_ini),
+			'jurusan' => $this->m_dashboard->jurusan($hari_ini),
 
 		);
 
-		foreach($data['ti'] as $p){
-
-			if (strtotime($p->jam_masuk) - strtotime($p->jam_masuk_kerja) > 0) {
-				$p->telat = strtotime($p->jam_masuk) - strtotime($p->jam_masuk_kerja);
-				$p->telat = $p->telat / 60 . ' menit';
-			}
-			if (strtotime($p->jam_masuk) - strtotime($p->jam_masuk_kerja) <= 0) {
-				$p->telat = '-';
-			}
-			if (strtotime($p->jam_pulang) - strtotime($p->jam_pulang_kerja) < 0) {
-				$p->psw   = strtotime($p->jam_pulang) - strtotime($p->jam_pulang_kerja);
-				$p->psw = $p->psw / -60 . ' menit';
-			}
-			if (strtotime($p->jam_pulang) - strtotime($p->jam_pulang_kerja) >= 0) {
-				$p->psw = '-';
-			}
-			if ($p->jam_masuk == Null || $p->jam_pulang == Null) {
-				$p->telat = "Absen woy";
-				$p->psw = "Absen woy";
-			}
-
-		}
 
 		if ($this->session->userdata['logged_in']==true) {
-	       	 $this->template->load('layout/template', 'laporan/ti', $data);
+	       	 $this->template->load('layout/template', 'jurusan/index', $data);
         }
         else{
 			redirect('Login-User');
@@ -87,127 +67,34 @@ class Jurusan extends MY_Controller {
 
 	}
 
-	public function sipil(){
-		$hari_ini = date('Y-m-d');
+  public function jurusan(){
 
-		$data = array(
-			
-			'title' => 'Laporan kehadiran Sipil',
-			'sipil' => $this->m_dashboard->sipil($hari_ini),
+    $hari_ini = date('Y-m-d');
+    $bulan_ini = date('-1 month', strtotime($hari_ini));
+    $data = array(
+      'title' => 'Grafik Laporan Kehadiran Pegawai Poliwangi',
+      'bulan' => $this->m_dashboard->bulan($hari_ini, $bulan_ini),
+      // 'jurusan' => $this->m_dashboard->jurusan($hari_ini, $bulan_ini),
+      'jurusan' => $this->m_dashboard->jurusan($hari_ini),
+
+    );
 
 
-		);
-
-		foreach($data['sipil'] as $p){
-
-			if (strtotime($p->jam_masuk) - strtotime($p->jam_masuk_kerja) > 0) {
-				$p->telat = strtotime($p->jam_masuk) - strtotime($p->jam_masuk_kerja);
-				$p->telat = $p->telat / 60 . ' menit';
-			}
-			if (strtotime($p->jam_masuk) - strtotime($p->jam_masuk_kerja) <= 0) {
-				$p->telat = '-';
-			}
-			if (strtotime($p->jam_pulang) - strtotime($p->jam_pulang_kerja) < 0) {
-				$p->psw   = strtotime($p->jam_pulang) - strtotime($p->jam_pulang_kerja);
-				$p->psw = $p->psw / -60 . ' menit';
-			}
-			if (strtotime($p->jam_pulang) - strtotime($p->jam_pulang_kerja) >= 0) {
-				$p->psw = '-';
-			}
-			if ($p->jam_masuk == Null || $p->jam_pulang == Null) {
-				$p->telat = "Absen woy";
-				$p->psw = "Absen woy";
-			}
-
-		}
-
-		if ($this->session->userdata['logged_in']==true) {
-	       	 $this->template->load('layout/template', 'laporan/sipil', $data);
+    if ($this->session->userdata['logged_in']==true) {
+           $this->template->load('layout/template', 'jurusan/jurusan', $data);
         }
         else{
-			redirect('Login-User');
+      redirect('Login-User');
         }
 
-	}
+
+
+  }
 
 	
 
-	public function total_jam(){
-
-		$pegawai_data = $this->m_dashboard->hari_ini($tanggal_sekarang);
-		$jumlah = count($pegawai_data['id_presensi']);
-		$jumlah_pegawai;
-		foreach ($jumlah as $p) {
-			if ($pegawai_data['jabatan'] == 'dosen') {
-			
-				if (date("D")!="Sat" || date("D")!="Sun") {
-					if (isset($pegawai_data['jam_masuk'])) {
-						$jumlah_pegawai=+1;
-					}
-					else{
-						$jumlah_pegawai = $jumlah_pegawai;
-					}
-				}
-				else{
-					if (isset($pegawai_data['jam_masuk'])) {
-						$jumlah_pegawai=+1;
-					}
-					else{
-						if ($pegawai_data['ijin'] == 'ada') {
-							$jumlah_pegawai=+1;
-						}
-						else{$jumlah_pegawai = $jumlah_pegawai;}
-					}
-				}
-
-			}
-			elseif ($pegawai_data['jabatan'] == 'satpam'){
-				if ($pegawai_data['jam_masuk'] >= $pegawai_data['jam_masuk_kerja'] && $pegawai_data['jam_pulang'] >= $pegawai_data['jam_pulang_kerja']) {
-						
-					$jumlah_pegawai=+1;
-
-				}
-				else{
-					
-					$jumlah_pegawai = $jumlah_pegawai;
-				}
-			}
-			else{
-				if (date("D")!="Sat" || date("D")!="Sun") {
-					if ($pegawai_data['jam_masuk'] >= $pegawai_data['jam_masuk_kerja'] && $pegawai_data['jam_pulang'] >= $pegawai_data['jam_pulang_kerja']) {
-							
-						$jumlah_pegawai=+1;
-
-					}
-					else{
-
-					}
-				}
-			}
-		}
-		
-	}
-
-	function tanggalMerah($hari_ini) {
-	$array = json_decode(file_get_contents("https://raw.githubusercontent.com/guangrei/Json-Indonesia-holidays/master/calendar.json"),true);
-
-	//check tanggal merah berdasarkan libur nasional
-	if(isset($array[$hari_ini])):		
-		$status_hari = $array[$hari_ini]["deskripsi"];
-
-	//check tanggal merah berdasarkan hari minggu
-	elseif(date("D",strtotime($hari_ini))==="Sat"):
-		$status_hari = 'Sabtu';
 	
-	elseif(date("D",strtotime($hari_ini))==="Sun"):
-		$status_hari = 'Minggu';
-		//bukan tanggal merah
-		else:
-			$status_hari = 'Hari Kerja';
-		endif;
 
-		// $this->input->post($status_hari);
-	}
 
 	public function export_data()
      {

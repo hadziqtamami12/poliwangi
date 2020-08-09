@@ -11,12 +11,14 @@ class m_security extends CI_Model {
         
         $this->db->select('*');
         $this->db->from('tb_pegawai');
-        $this->db->join('tb_jabatan', 'tb_pegawai.id_jabatan = tb_pegawai.id_jabatan');
+        $this->db->join('tb_jabatan', 'tb_pegawai.id_jabatan = tb_jabatan.id_jabatan');
         $this->db->join('tb_level_golongan', 'tb_pegawai.id_level_golongan = tb_level_golongan.id_level_golongan');
         $this->db->join('tb_jam_kerja', 'tb_pegawai.id_jam_kerja = tb_jam_kerja.id_jam_kerja');
-        $this->db->where('tb_pegawai.id_jabatan', '2');
+        $this->db->where('tb_pegawai.id_jabatan', '68')
+        ->or_where('tb_pegawai.id_jabatan', '44')
+        ->or_where('tb_pegawai.id_jabatan', '45');
         $this->db->group_by('id_pegawai');
-        $this->db->order_by('id_pegawai','asc');
+        $this->db->order_by('tb_pegawai.id_jabatan','asc');
         // $this->db->like('id_rekap',$cari);
         $data = $this->db->get();
 		return $data->result();

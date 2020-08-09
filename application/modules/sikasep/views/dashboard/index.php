@@ -1,4 +1,4 @@
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 
 
   setInterval(myTimer, 60000);
@@ -22,7 +22,7 @@
       
     }
   }
-</script>
+</script> -->
 
 
 <!-- <p id="demo"></p> -->
@@ -115,10 +115,10 @@
  endif; 
  ?>
  <!-- <a class="btn mb-3 btn-success" href="<?php echo base_url(); ?>sikasep/Dashboard/telegram_bot"> <i class="fa fa-download"></i> Tele tes </a> -->
- <div class="card">
-  <div class="card-body">
+<div class="container card">
+  <div class="card-body"> 	
 
-    <table class="table table-hover table-responsive" id="myTable">
+    <table  class=" display  table-striped table-bordered text-center" id="myTable">
       <thead>
         <tr>
           <th>No</th>
@@ -158,15 +158,9 @@
             <td>
               <?php 
 
-              if ($p->jam_masuk != '00:00:00') {
-                echo "Masuk";
-              }
-              elseif($p->ijin == 'ada') {
-                echo "Ijin";
-              }
-              else{
-                echo "Tidak Masuk";
-              }
+            
+          
+          		echo $p->status;
               ?>
             </td>
 
@@ -180,8 +174,7 @@
 
   </div>
 </div>
-</div>
-</div>
+  </div>
 
 
 

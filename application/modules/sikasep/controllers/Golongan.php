@@ -56,24 +56,19 @@ class Golongan extends MY_Controller {
 
 
 	public function tampil_golongan()
-	{
+	{	
 
-		if (isset($_POST['cari'])) {
-			$data['f_golongan']	 = $this->m_golongan->view_data($this->input->post('id_level_golongan'));
+			$id = $this->input->post('id_level_golongan');
+			$data['f_golongan']	 = $this->m_golongan->view_data($id);
+			$data['title'] = 'Golongan Pegawai';
 			if ($this->input->post('id_level_golongan') == 'all') {
 				$data['f_golongan']	 = $this->m_golongan->all();
 			}
 		 	
-		    if ($this->session->userdata['logged_in']==true) {
-		       	 $this->template->load('layout/template', 'golongan/tabel_data', $data);
+		    $this->load->view('golongan/tabel_data', $data);
 
-	        }
-	        else{
-				redirect('Login-User');
-	        }
 
 			
-		}
 	}
 
 	public function add_data(){

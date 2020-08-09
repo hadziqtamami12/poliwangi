@@ -168,7 +168,17 @@ class Auth extends MX_Controller {
                     );
 
                     $this->session->set_userdata($data_sesi); 
-          redirect('sikasep/Dashboard');
+          redirect('sikasep/Jurusan');
+        }
+        elseif ($data->id_level_user  == '5') {
+          $data_sesi = array(
+                        'user_login' => $user_login,
+                        'username' => $username,
+                        'logged_in' => true,
+                    );
+
+                    $this->session->set_userdata($data_sesi); 
+          redirect('sikasep/Rekap/detail_pegawai/'.$data->username);
         }
         // elseif ($data->id_level_user  == '4') {
         //  redirect('tes/index');

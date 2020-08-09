@@ -82,9 +82,9 @@
 
                                         </div>
                                         <div class="modal-footer">
-                                            <a href="javascript::void" class="btn default" data-dismiss="modal">Cancel</a>
-                                            <a class="btn btn-danger delete_calendar" style="display: none; color: white;">Delete</a>
-                                            <button type="submit" class="btn green">Submit</button>
+                                            <a href="javascript::void" class="btn default" data-dismiss="modal">Batal</a>
+                                            <a class="btn btn-danger delete_calendar" style="display: none; color: white;">Hapus</a>
+                                            <button type="submit" class="btn green">Perbarui</button>
                                         </div>
                                     </form>
                                 </div>

@@ -22,6 +22,10 @@ class ComposerStaticInit9c7788f84ff6c81d013be73302d59104
         array (
             'Zxing\\' => 6,
         ),
+        'T' => 
+        array (
+            'TelegramBot\\Api\\' => 16,
+        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Php80\\' => 23,
@@ -67,6 +71,10 @@ class ComposerStaticInit9c7788f84ff6c81d013be73302d59104
         'Zxing\\' => 
         array (
             0 => __DIR__ . '/..' . '/khanamiryan/qrcode-detector-decoder/lib',
+        ),
+        'TelegramBot\\Api\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/telegram-bot/api/src',
         ),
         'Symfony\\Polyfill\\Php80\\' => 
         array (

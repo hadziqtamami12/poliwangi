@@ -62,7 +62,7 @@ class Jam_Kerja extends MY_Controller {
 		);
 	 
 		$this->m_jam_kerja->update_data($where,$data,'tb_jam_kerja');
-		redirect('Sikasep/Jam_Kerja');
+		redirect('sikasep/Jam_Kerja');
 		// $this->m_jam_kerja->edit_data($where, 'tb_jam_kerja')->result();
 		// $data = $this->m_jam_kerja->update_data($data, $id_pegawai);
 		// redirect('Jam_Kerja');		

@@ -7,8 +7,7 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/3.2.0/js/bootstrap-colorpicker.js"></script>
 
-  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+
   <script src="<?= base_url('assets/'); ?>dashboard/vendor/js-cookie/js.cookie.js"></script>
   <script src="<?= base_url('assets/'); ?>dashboard/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
   <!-- <script src="<?= base_url('assets/'); ?>dashboard/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script> -->
@@ -21,7 +20,8 @@
   <script src="<?= base_url('assets/'); ?>dashboard/dist/sweetalert2.min.js"></script>
   
   <!-- <script src="<?= base_url('assets/'); ?>dashboard/js/myscript.js"></script> -->
-
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
 
 
 <!-- <script src="<?= base_url('assets/'); ?>vendor/select2.js"></script> -->
@@ -38,7 +38,9 @@
         $("#wrapper").toggleClass("toggled");
       });
 
-      $('#myTable').DataTable({});
+      $('#myTable').DataTable({
+        "rowGroup": [2]
+      });
       $('#myTableGolongan').DataTable({});
   
 
@@ -142,26 +144,24 @@ $('.btn-edit-keterangan').on('click',function(){
     });
 
 
-function cari_golongan()
-      {
-        golongan = $('[name="id_level_golongan"]');
-        $.ajax({
-          type : 'POST',
-          data: "cari="+1+"&id_level_golongan="+golongan.val(),
-          url  : "<?php echo base_url('sikasep/Golongan/tampil_golongan');?>",
-          cache: false,
-          // beforeSend: function() {
-          //   sel_kota.attr('disabled', true);
-          // },
-          success: function(data){
-            $('#myTableGolongan').html(data);
+// function cari_golongan()
+//       {
+//         var golongan = $('[name="id_level_golongan"]').val();
+//         // var base_url = $('#baseurl').val();
+        
+//         $.ajax({
+//     type: 'POST',
+//     url: "<?php echo base_url('sikasep/Golongan/tampil_golongan');?>",
+//     data: {id_level_golongan: golongan},
+//     success:function(result) {
+//         alert(result); // alert your date variable value here
+//     },
+//     error:function(result) {
+//       console.log(result);
+//     }
+// });
 
-
-          }
-
-        });
-       return false;
-      }
+//       }
 
   </script>
 <!-- calendar -->

@@ -1,5 +1,3 @@
-
-
 <div class="container-fluid mt-5">    
 
     <!-- <button class="btn btn-info btn-add-golongan" data-toggle="modal" data-target="#addModalGolongan"> Tambah Golongan <span class="fa fa-plus"></span> </button> -->
@@ -7,18 +5,17 @@
 
 <!-- <div class="text-center golongan">
   <select name="id_level_golongan" class="btn btn-info p-10 " onchange="cari_golongan()">
-  <select name="id_level_golongan" class="btn btn-info p-10 " onchange="cari_golongan()">
       <option value="all">- All -</option>
       <?php foreach ($golongan as $p): ?>
         <option value="<?php echo $p->id_level_golongan; ?>"><?php echo $p->level_golongan; ?></option>
       <?php endforeach; ?>
     </select>
-</div> -->
+</div>  -->
 
-                <div class="card">
-            <div class="card-body">
+ <div class="container card">
+  <div class="card-body"> 	
 
-            <table class="table table-hover table-responsive" id="myTable">
+    <table  class=" display  table-striped table-bordered text-center" id="myTable">
             <thead>
                         <tr>
                             <th>No</th>
@@ -42,7 +39,7 @@
     <td><?php echo $p->level_golongan; ?></td>
     <td><?php echo $p->jurusan; ?></td>
     <td class="text-center">
-        <a href="#" class="btn btn-info btn-edit-golongan" data-id_pegawai="<?= $p->id_pegawai;?>" data-nama_pegawai="<?= $p->nama_pegawai;?>" data-jabatan="<?= $p->jabatan;?>" data-level_golongan="<?= $p->level_golongan;?>" data-jurusan="<?= $p->jurusan;?>"><span class="fa fa-pencil"></span></a>
+        <a href="#" class="btn btn-sm btn-info btn-edit-golongan" data-id_pegawai="<?= $p->id_pegawai;?>" data-nama_pegawai="<?= $p->nama_pegawai;?>" data-jabatan="<?= $p->jabatan;?>" data-level_golongan="<?= $p->level_golongan;?>" data-jurusan="<?= $p->jurusan;?>"><span class="fa fa-pencil"></span></a>
         <!-- <a href="<?= base_url('admin/pegawai/delete_data/'.$p->id_pegawai);?>"  class="btn btn-danger"><span class="fa fa-trash"></span></a> -->
     </td>
   </tr>
@@ -66,7 +63,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit pegawai</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Kelola Golongan PNS/Non-PNS Pegawai</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -108,8 +105,8 @@
             </div>
             <div class="modal-footer">
                 <input type="hidden" name="id_pegawai" class="id_pegawai">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Update</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                <button type="submit" class="btn btn-primary">Perbarui</button>
             </div>
             </div>
         </div>
@@ -117,7 +114,27 @@
     </form>
 
 
+<script type="text/javascript">
+    
+function cari_golongan()
+      {
+        var golongan = $('[name="id_level_golongan"]').val();
+        // var base_url = $('#baseurl').val();
+        
+        $.ajax({
+    type: 'POST',
+    url: "<?php echo base_url('sikasep/Golongan/tampil_golongan');?>",
+    data: {id_level_golongan: golongan},
+    success:function(result) {
+        // alert(result); // alert your date variable value here
+    },
+    error:function(result) {
+      console.log(result);
+    }
+});
 
+      }
+</script>
 
 
 

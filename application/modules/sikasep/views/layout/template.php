@@ -25,7 +25,8 @@
 
 		<!-- Main content -->
 		<?php require_once('_nav.php') ;?>
-			
+		<div>
+          
 				<?php echo $contents ;?>
 		</div>
 

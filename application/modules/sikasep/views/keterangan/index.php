@@ -1,28 +1,20 @@
-
-
 <div class="container-fluid mt-5">
     
     <!-- <button class="btn btn-info btn-add" data-toggle="modal" data-target="#addModal"> Tambah keterangan <span class="fa fa-plus"></span> </button> -->
 
-    </br>
         <!-- table -->
-        <div class="card">
-            <div class="card-body">
+ <div class="container card ">
+  <div class="card-body"> 	
 
-            <table class="table" id="myTable">
-            <thead>
-                        <tr>
+    <table  class=" display  table-striped table-bordered" id="myTable" style="width:100%;">
+            <thead >
+                        <tr scope="row">
                             <th>No</th>
                             <th>Tanggal</th>
                             <th>Nama</th>
                             <th>Ijin</th>
                             <th>Aksi</th>
-<!--                             <th>Hadir</th>
-                            <th>Uang Makan/Hari</th>
-                            <th>Total Uang Makan</th>
-                            <th>Pajak</th>
-                            <th>Total Terima</th> -->
-                            <!-- <th>Keterangan</th> -->
+
                         </tr>
                     </thead>
                     <tbody>
@@ -34,11 +26,9 @@
                                 <td class="no"><?php echo $no++; ?></td>
                                 <td><?php echo $p->tanggal_sekarang; ?></td>
                                 <td><?php echo $p->nama_pegawai; ?></td>
-                           <!--      <td><?php echo $p->keterangan_telat; ?></td>
-                                <td><?php echo $p->keterangan_telat; ?></td> -->
                                 <td><?php echo $p->ijin; ?></td>
                                 <td class="text-center">
-                                    <a href="#" class="btn btn-info btn-edit-keterangan" data-id_presensi="<?= $p->id_presensi;?>" data-keterangan_telat="<?= $p->keterangan_telat;?>" data-keterangan_psw="<?= $p->keterangan_psw;?>" data-ijin="<?= $p->ijin;?>"><span class="fa fa-pencil"></span></a>
+                                    <a href="#" class="btn btn-info btn-sm btn-edit-keterangan" data-id_presensi="<?= $p->id_presensi;?>"  data-ijin="<?= $p->ijin;?>"><span class="fa fa-pencil"></span></a>
                                     <!-- <a href="<?= base_url('admin/keterangan/delete_data/'.$p->id_keterangan);?>"  class="btn btn-danger"><span class="fa fa-trash"></span></a> -->
                                 </td>
 
@@ -56,12 +46,14 @@
 
 
 
+
+
 <form action="<?php echo base_url(). 'sikasep/Keterangan/update_data'; ?>" method="post" enctype="multipart/form-data">
         <div class="modal fade" id="editModalKeterangan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="KeteranganModal">Edit Ijin</h5>
+                <h5 class="modal-title" id="KeteranganModal">Kelola Keterangan Ijin Pegawai</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -102,8 +94,8 @@
              
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Update</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                <button type="submit" class="btn btn-primary">Perbarui</button>
             </div>
             </div>
         </div>

@@ -19,7 +19,7 @@ endif;
     </a>
 </div>
 
-<div class="card">
+<div class="card mt-5">
     <div class="card-body">
 
         <?php 
@@ -55,9 +55,10 @@ endif;
         <?php endforeach; ?>
 
         
+	
 
-        <table class="table table-hover table-responsive" id="myTable">
-            <thead class="thead">
+    <table  class=" display  table-striped table-bordered" id="myTable" style="width:100%">
+      <thead>
                 <tr>
                     <th>No</th>
                     <th>Tanggal</th>
@@ -86,20 +87,14 @@ endif;
                         <td><?php echo $p->telat;   ?></td> 
                         <td><?php echo $p->psw;   ?></td> 
                         <td><?php echo $p->ijin;   ?></td> 
-                        <td>
-                          <?php 
+            <td>
+              <?php 
 
-                          if ($p->jam_masuk != '00:00:00') {
-                              echo "Masuk";
-                          }
-                          elseif($p->ijin == 'ada') {
-                            echo "Ijin";
-                        }
-                        else{
-                          echo "Tidak Masuk";
-                          }
-                          ?>
-                        </td>
+            
+          
+          		echo $p->status;
+              ?>
+            </td>
 
 
 
@@ -111,5 +106,4 @@ endif;
 
 
 </div>
-
 

@@ -18,39 +18,31 @@
 
         <!-- Nav items -->
           <ul class="navbar-nav" id="myTab">
+            <?php if ($this->session->userdata('id_level_user') == 2 || $this->session->userdata('id_level_user') == 3): ?>
             <li class="nav-item" style="padding-left: 10%;">
               <h2>
                 <small class="text-muted text-light">
-                  <a class="nav-link" href="<?= base_url() ?>sikasep/Dashboard"><h4>Dashboard</h4></a>
+                  <a class="nav-link" href="<?= base_url() ?>sikasep/Dashboard"><h4>Beranda</h4></a>
                 </small>
               </h2>
             </li>
+            <?php endif; ?>
 
            <?php if ($this->session->userdata('id_level_user') == 3): ?>
             <li class="nav-item" style="padding-left: 10%;">
               <h2>
                 <small class="text-muted text-light">
-                  <a class="nav-link" href="<?= base_url() ?>sikasep/Rekap"><h4>Rekap</h4></a>
+                  <a class="nav-link" href="<?= base_url() ?>sikasep/Rekap"><h4> Kelola Data Rekapitulasi Presensi</h4></a>
                 </small>
               </h2>
             </li>
           <?php endif; ?>
 
-          <?php if ($this->session->userdata('id_level_user') == 3): ?>
+          <?php if ($this->session->userdata('id_level_user') == 0): ?>
             <li class="nav-item" style="padding-left: 10%;">
               <h2>
                 <small class="text-muted text-light">
-                  <a class="nav-link" href="<?= base_url() ?>sikasep/Rekap/kirim_laporan"><h4>Kirim Laporan</h4></a>
-                </small>
-              </h2>
-            </li>
-          <?php endif; ?>
-
-          <?php if ($this->session->userdata('id_level_user') == 2): ?>
-            <li class="nav-item" style="padding-left: 10%;">
-              <h2>
-                <small class="text-muted text-light">
-                  <a class="nav-link" href="<?= base_url() ?>sikasep/Security"><h4>Security</h4></a>
+                  <a class="nav-link" href="<?= base_url() ?>sikasep/Rekap/kirim_laporan"><h4>Kirim Laporan ke Group Telegram</h4></a>
                 </small>
               </h2>
             </li>
@@ -60,7 +52,7 @@
             <li class="nav-item" style="padding-left: 10%;">
               <h2>
                 <small class="text-muted text-light">
-                  <a class="nav-link" href="<?= base_url() ?>sikasep/Jam_Kerja"><h4>Jam Kerja</h4></a>
+                  <a class="nav-link" href="<?= base_url() ?>sikasep/Security"><h4>Kelola Jadwal Keamanan</h4></a>
                 </small>
               </h2>
             </li>
@@ -70,7 +62,7 @@
             <li class="nav-item" style="padding-left: 10%;">
               <h2>
                 <small class="text-muted text-light">
-                  <a class="nav-link" href="<?= base_url() ?>sikasep/Golongan"><h4>Golongan PNS/Non PNS</h4></a>
+                  <a class="nav-link" href="<?= base_url() ?>sikasep/Jam_Kerja"><h4>Kelola Jam Kerja Pegawai</h4></a>
                 </small>
               </h2>
             </li>
@@ -80,7 +72,7 @@
             <li class="nav-item" style="padding-left: 10%;">
               <h2>
                 <small class="text-muted text-light">
-                  <a class="nav-link" href="<?= base_url() ?>sikasep/Keterangan"><h4>Ket. Kehadiran</h4></a>
+                  <a class="nav-link" href="<?= base_url() ?>sikasep/Golongan"><h4>Kelola PNS/Non PNS</h4></a>
                 </small>
               </h2>
             </li>
@@ -90,7 +82,17 @@
             <li class="nav-item" style="padding-left: 10%;">
               <h2>
                 <small class="text-muted text-light">
-                  <a class="nav-link" href="<?= base_url() ?>sikasep/Status_Hari"><h4>Status Hari Kerja</h4></a>
+                  <a class="nav-link" href="<?= base_url() ?>sikasep/Keterangan"><h4>Kelola Keterangan Kehadiran</h4></a>
+                </small>
+              </h2>
+            </li>
+          <?php endif; ?>
+
+          <?php if ($this->session->userdata('id_level_user') == 2): ?>
+            <li class="nav-item" style="padding-left: 10%;">
+              <h2>
+                <small class="text-muted text-light">
+                  <a class="nav-link" href="<?= base_url() ?>sikasep/Status_Hari"><h4>Kelola Hari Kerja</h4></a>
                 </small>
               </h2>
             </li>
@@ -100,7 +102,7 @@
              <li class="nav-item" style="padding-left: 10%;">
               <h2>
                 <small class="text-muted text-light">
-                  <a class="nav-link" href="<?= base_url() ?>sikasep/Jurusan/ti"><h4>Kehadiran Teknik Informatika</h4></a>
+                  <a class="nav-link" href="<?= base_url() ?>sikasep/Jurusan"><h4>Grafik Kehadiran Pegawai</h4></a>
                 </small>
               </h2>
             </li>
@@ -108,13 +110,11 @@
             <li class="nav-item" style="padding-left: 10%;">
               <h2>
                 <small class="text-muted text-light">
-                  <a class="nav-link" href="<?= base_url() ?>sikasep/Jurusan/sipil"><h4>Kehadiran Teknik Sipil</h4></a>
+                  <a class="nav-link" href="<?= base_url() ?>sikasep/Jurusan/jurusan"><h4>Grafik Kehadiran Pegawai</h4></a>
                 </small>
               </h2>
             </li>
           <?php endif; ?>
-
-          
 
         <hr class="my-0">
 

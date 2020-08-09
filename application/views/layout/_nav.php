@@ -33,7 +33,7 @@
                         </li>
 
                         <li class="nav-item ">
-                            <a href="<?php echo base_url() ;?>Login-User" class="nav-link js-scroll-trigger">
+                            <a href="<?php echo base_url('auth/user') ;?>" class="nav-link js-scroll-trigger">
                                 SIRAPAT
                             </a>
                         </li>

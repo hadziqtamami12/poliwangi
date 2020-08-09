@@ -11,10 +11,10 @@
     endif; 
 ?>
         <!-- table -->
-        <div class="card">
-            <div class="card-body">
+ <div class="container card">
+  <div class="card-body"> 	
 
-            <table class="table table-hover table-responsive" id="myTable">
+    <table  class=" display  table-striped table-bordered" id="myTable" style="width:100%">
     <thead class="thead">
                         <tr>
                             <th>No</th>
@@ -28,7 +28,7 @@
                             <th>Total Uang Makan</th>
                             <th>Pajak</th>
                             <th>Total Terima</th>
-                            <!-- <th>Keterangan</th> -->
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -69,12 +69,11 @@
                                 echo $total;
                                  ?></td>
                                 <td>Rp. <?php echo $p->pajak; ?></td>
-                                <td colspan="2">Rp. <?php 
+                                <td>Rp. <?php 
                                     echo $total_semua = $total - $p->pajak;
                                  ?></td>
-                                <!-- <td><?php echo $p->keterangan; ?></td> -->
-                                <td>
-                                    <a href="<?= base_url('sikasep/Rekap/detaiil_rekap_pegawai/'.$p->id_pegawai);?>">
+                                <td class="text-center">
+                                    <a href="<?= base_url('sikasep/Rekap/detail_rekap_pegawai/'.$p->id_pegawai);?>">
                                         <i class="fa fa-pencil"></i>
                                     </a>
                                 </td>

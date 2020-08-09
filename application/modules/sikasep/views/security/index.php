@@ -1,20 +1,18 @@
-
-
 <div class="container-fluid mt-5">
     
     <!-- <button class="btn btn-info btn-add" data-toggle="modal" data-target="#addModal"> Tambah security <span class="fa fa-plus"></span> </button> -->
 
-    </br>
         <!-- table -->
-                <div class="card">
-            <div class="card-body">
+ <div class="container card">
+  <div class="card-body"> 	
 
-            <table class="table" id="myTable">
+    <table  class=" display  table-striped table-bordered" id="myTable" style="width:100%">
             <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nama</th>
                             <th>NIP</th>
+                            <th>Nama</th>
+                            <th>Jabatan</th>
                             <th>Jadwal</th>
                             <th>Aksi</th>
 <!--                             <th>Hadir</th>
@@ -32,8 +30,9 @@
                             ?>
                             <tr>
                                 <td class="no"><?php echo $no++; ?></td>
-                                <td><?php echo $p->nama_pegawai; ?></td>
                                 <td><?php echo $p->id_pegawai; ?></td>
+                                <td><?php echo $p->nama_pegawai; ?></td>
+                                <td><?php echo $p->jabatan; ?></td>
                                 <td><?php echo $p->keterangan_hari; ?></td>
                                 <td class="text-center">
                                     <a href="#" class="btn btn-info btn-edit-security" 
@@ -61,7 +60,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="securityModal">Edit Jadwal</h5>
+                <h5 class="modal-title" id="securityModal">Kelola Jadwal Keamanan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -89,8 +88,8 @@
             </div>
             <div class="modal-footer">
                 <input type="hidden" name="id_pegawai" class="id_pegawai">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Update</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                <button type="submit" class="btn btn-primary">Perbarui</button>
             </div>
             </div>
         </div>

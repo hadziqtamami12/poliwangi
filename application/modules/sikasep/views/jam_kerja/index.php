@@ -3,7 +3,7 @@
             <div class="card-body">
 
     <br>
-    <h1>Edit Jam Kerja Pegawai</h1>
+    <h1>Kelola Jam Kerja Pegawai</h1>
      <form action="<?php echo base_url(); ?>sikasep/Jam_Kerja/edit" method="post">
   <div class="form-row">
     <div class="form-group col-12">

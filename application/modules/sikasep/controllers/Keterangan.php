@@ -32,13 +32,13 @@ class Keterangan extends MY_Controller {
 	{	
 
 		// $tanggal_sekarang = date('Y-m-d');
-		$id_presensi = 1;
-		$datapeg = array('pegawai' => $this->m_keterangan->keterangan_list_pegawai($id_presensi));
+		// $id_presensi = 1;
+		// $datapeg = array('pegawai' => $this->m_keterangan->keterangan_list_pegawai($id_presensi));
 		// $nama_pegawai = $datapeg['id_pegawai'];
 
-		echo "<pre>";
-		echo $datapeg['pegawai'];
-		echo "<pre>";
+		// echo "<pre>";
+		// echo $datapeg['pegawai'];
+		// echo "<pre>";
 
 
 		$data = array(
