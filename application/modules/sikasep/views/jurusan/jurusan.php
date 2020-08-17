@@ -6,7 +6,7 @@
     //Inisialisasi nilai variabel awal
 	$nama_jurusan= "";
 	$jumlah=null;
-	$title = "Grafik Presensi Jurusan per Hari " .date('M-Y') ;
+	$title = "Grafik Presensi per Tanggal " .date('d-M-Y') ;
 	foreach ($jurusan as $item)
 	{
 		$jurusannya=$item->jurusan;
@@ -26,7 +26,7 @@
 			},
 			labels: {
 				items: [{
-					html: '<?php echo date('M-Y') ?>',
+					html: '<?php echo date('d-M-Y') ?>',
 					style: {
 						left: '50px',
 						top: '18px',
@@ -48,14 +48,21 @@
 	    $i=3;
 
 	    foreach ($jurusan as $x ): 
+			
 	    	?>
 	    	{
-	    		name: '<?php echo $x->jurusan?>',
+	    		name: '<?php 
+							if($x->jurusan=='TENAGA KEPENDIDIKAN PENDUKUNG'):
+							echo 'Satpam';
+							else:
+							echo $x->jurusan;
+							endif;
+              			?>',
 	    		y: <?php echo $x->totaljur?>,
 	    		color: Highcharts.getOptions().colors[<?php echo $i;?>]
 
 	    	},
-	    	<?php 
+	    	<?php
 	    	$i++;
 	    endforeach; 
 	    ?>

@@ -6,7 +6,7 @@
  <div class="container card">
   <div class="card-body"> 	
 
-    <table  class=" display  table-striped table-bordered" id="myTable" style="width:100%">
+    <table class=" table table-responsive table-striped table-bordered" id="myTable">
             <thead>
                         <tr>
                             <th>No</th>

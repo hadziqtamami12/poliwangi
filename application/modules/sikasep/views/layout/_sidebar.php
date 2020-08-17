@@ -27,6 +27,16 @@
               </h2>
             </li>
             <?php endif; ?>
+            
+           <?php if ($this->session->userdata('id_level_user') == 5): ?>
+            <li class="nav-item" style="padding-left: 10%;">
+              <h2>
+                <small class="text-muted text-light">
+                  <a class="nav-link active" href="#"><h4>Beranda</h4></a>
+                </small>
+              </h2>
+            </li>
+            <?php endif; ?>
 
            <?php if ($this->session->userdata('id_level_user') == 3): ?>
             <li class="nav-item" style="padding-left: 10%;">
@@ -102,7 +112,7 @@
              <li class="nav-item" style="padding-left: 10%;">
               <h2>
                 <small class="text-muted text-light">
-                  <a class="nav-link" href="<?= base_url() ?>sikasep/Jurusan"><h4>Grafik Kehadiran Pegawai</h4></a>
+                  <a class="nav-link" href="<?= base_url() ?>sikasep/Jurusan"><h4>Beranda</h4></a>
                 </small>
               </h2>
             </li>
@@ -110,7 +120,7 @@
             <li class="nav-item" style="padding-left: 10%;">
               <h2>
                 <small class="text-muted text-light">
-                  <a class="nav-link" href="<?= base_url() ?>sikasep/Jurusan/jurusan"><h4>Grafik Kehadiran Pegawai</h4></a>
+                  <a class="nav-link" href="<?= base_url() ?>sikasep/Jurusan/jurusan"><h4>Kehadiran Pegawai per Hari</h4></a>
                 </small>
               </h2>
             </li>

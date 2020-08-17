@@ -41,6 +41,7 @@ class Dashboard extends MY_Controller {
 	{	
 		//$this->update_presensi_pegawai();
 		$tanggal_sekarang = date('Y-m-d');
+      	//$tanggal_sekarang = date('2020-08-14');
 		$data = array(
 			'title' =>   'Dashboard',
 			'tidakmasuk' => $this->m_dashboard->jum_peg_tidakmasuk($tanggal_sekarang),
@@ -112,18 +113,32 @@ class Dashboard extends MY_Controller {
 
 	}
 
-	public function validasi(){
+	public function add_validasi(){
 		$tanggal_sekarang = date('Y-m-d');
 		$data = array(
 
 			'tanggal' => $tanggal_sekarang,
-			'status' => 'tervalidasi'
 		);
 
 		$this->m_dashboard->validasi_add($data);
 		redirect('sikasep/Dashboard');
 	}
 
+	public function validasi(){
+		$tanggal_sekarang = date('Y-m-d');
+      	$where = array(
+          'tanggal' => $tanggal_sekarang,
+		   'status' => 'belum tervalidasi'
+          );
+		$data = array(
+
+			'tanggal' => $tanggal_sekarang,
+			'status' => 'tervalidasi'
+		);
+
+		$this->m_dashboard->validasi_update($where,$data,'tb_validasi_rekap');
+		redirect('sikasep/Dashboard');
+	}  	
 
 
 
@@ -137,7 +152,7 @@ class Dashboard extends MY_Controller {
 		$password="PoliwangiApi!@#876";
 
 		$tanggal_sekarang = date('Y-m-d');		
-      	//$tanggal_sekarang = date('2020-07-31');
+      	//$tanggal_sekarang = date('2020-08-10');
 
 		$api_token= $this->api_poliwangi->RestApiInit($server, $username, $password);
 
@@ -308,7 +323,7 @@ class Dashboard extends MY_Controller {
 		$password="PoliwangiApi!@#876";
 
 		$tanggal_sekarang = date('Y-m-d');		
-      	//$tanggal_sekarang = date('2020-07-31');
+      	//$tanggal_sekarang = date('2020-08-10');
 
 		$api_token= $this->api_poliwangi->RestApiInit($server, $username, $password);
 
@@ -434,8 +449,8 @@ class Dashboard extends MY_Controller {
 
 
 						if(intval($presensiweb[$k]['noid']) == $pegawai[$i]['noid']){
-							$pegawai[$i]['jam_masuk'] = date('Y-m-d').' '.$presensiweb[$k]['jam_masuk'];
-                          	$pegawai[$i]['jam_pulang'] = date('Y-m-d').' '.$presensiweb[$k]['jam_pulang'];
+							$pegawai[$i]['jam_masuk'] = $tanggal_sekarang.' '.$presensiweb[$k]['jam_masuk'];
+                          	$pegawai[$i]['jam_pulang'] = $tanggal_sekarang.' '.$presensiweb[$k]['jam_pulang'];
 						}
 
 						$k++;                
@@ -452,8 +467,8 @@ class Dashboard extends MY_Controller {
 
 
 						if(intval($absensiweb[$l]['noid']) == $pegawai[$i]['noid']){
-							$pegawai[$i]['jam_masuk'] = date('Y-m-d').' '.$absensiweb[$l]['jam_masuk'];
-                          	$pegawai[$i]['jam_pulang'] = date('Y-m-d').' '.$absensiweb[$l]['jam_pulang'];
+							$pegawai[$i]['jam_masuk'] = $tanggal_sekarang.' '.$absensiweb[$l]['jam_masuk'];
+                          	$pegawai[$i]['jam_pulang'] = $tanggal_sekarang.' '.$absensiweb[$l]['jam_pulang'];
 						}
 
 						$l++;                
@@ -632,14 +647,34 @@ class Dashboard extends MY_Controller {
 			}
 			if (strtotime($p->jam_pulang) - strtotime($p->jam_pulang_kerja) < 0) {
 				$p->psw   = strtotime($p->jam_pulang) - strtotime($p->jam_pulang_kerja);
-				$p->psw = $p->psw / 60 . ' menit';
+				$p->psw = $p->psw / -60 . ' menit';
 			}
 			if (strtotime($p->jam_pulang) - strtotime($p->jam_pulang_kerja) >= 0) {
 				$p->psw = '-';
 			}
 			if ($p->jam_masuk == '00:00:00' || $p->jam_pulang == '00:00:00') {
-				$p->telat = "Absen woy";
-				$p->psw = "Absen woy";
+				$p->telat = "-";
+				$p->psw = "-";
+			}
+			
+			if ($p->jam_masuk != '00:00:00'){
+				$p->status = "Masuk";
+			}
+			if($p->jam_masuk == '00:00:00'){
+				
+				if ($p->id_status_hari != 0){
+					$p->status = "Libur ".$data['namaharilibur']['title'];
+				}		
+				elseif ($p->ijin == 'ada'){
+					$p->status = "Ijin";
+				}
+				elseif (date('D')=='Sun'){
+					$p->status = "Sabtu/Minggu";
+				}
+				else{                 
+					$p->status = "Tidak Masuk";
+				}
+				
 			}
 
 

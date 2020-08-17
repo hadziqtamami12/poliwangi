@@ -3,11 +3,11 @@
     <!-- <button class="btn btn-info btn-add" data-toggle="modal" data-target="#addModal"> Tambah keterangan <span class="fa fa-plus"></span> </button> -->
 
         <!-- table -->
- <div class="container card ">
+ <div class="container card">
   <div class="card-body"> 	
 
-    <table  class=" display  table-striped table-bordered" id="myTable" style="width:100%;">
-            <thead >
+    <table class="table table-striped table-bordered" id="myTable">
+            <thead>
                         <tr scope="row">
                             <th>No</th>
                             <th>Tanggal</th>

@@ -35,6 +35,13 @@
 <!-- <a class="btn btn-success" href="<?php echo base_url(); ?>sikasep/Dashboard/telegram_bot"> <i class="fa fa-download"></i> Tele tes </a> -->
 
 
+<div>
+  <select id="bulan" name="bulan" class="form-control">
+    <option value="-"> Filter Bulan </option>
+    <option value="07"> Juli </option>
+    <option value="08"> Agustus </option>
+  </select>
+</div>
 <div id="grafik" style="width:100%; height:400px;"></div>
 
 
@@ -42,17 +49,17 @@
     //Inisialisasi nilai variabel awal
     $tanggal= "";
     $jumlah=null;
-    $title = "Grafik Presensi Pegawai Bulan " .date('M-Y') ;
     foreach ($bulan as $item)
     { 
         $tanggal_sekarang=$item->tanggal_sekarang;
         $tanggal .= "'$tanggal_sekarang'". ", ";
         $jum=$item->total;
         $jumlah .= "$jum". ", ";
+        $titlenya = "Grafik Presensi Pegawai per Bulan ". date('M-Y', strtotime($item->tanggal_sekarang));
   } 
     ?>
 
-<?php
+<!-- <?php
     $nama_jurusan= "";
     $jumlah2=null;
     $title2 = "Grafik Presensi Pegawai per Hari " .date('M-Y') ;
@@ -63,12 +70,32 @@
         $jum2=$item->totaljur;
         $jumlah2 .= "$jum2". ", ";
   } 
-    ?> 
+    ?>  -->
 
   <script type="text/javascript">
+    $(document).ready(function() {
+
+    $('#bulan').change(function() {
+      var bulan = $('#bulan').val();
+      $.ajax({
+        url: "<?php echo base_url(); ?>sikasep/Jurusan/filter_grafik",
+        method: "POST",
+        data: {
+          bulan: bulan
+        },
+        success: function(data) {
+          $('#grafik').html(data)
+        }
+      })
+      
+    })
+  });
+
+    
+
     Highcharts.chart('grafik', {
       title: {
-        text: '<?php echo $title; ?>'
+        text: '<?php echo $titlenya; ?>'
       },
       xAxis: {
         categories: [<?php echo $tanggal; ?>]
@@ -80,7 +107,7 @@
       },
       labels: {
         items: [{
-          html: '<?php echo date('M-Y') ?>',
+          // html: '<?php echo $titlenya ?>',
           style: {
             left: '50px',
             top: '18px',
@@ -95,11 +122,6 @@
       enabled: false
     },
     series: [
-      // {
-      //   type: 'column',
-      //   name: [<?php echo $tanggal;?>],
-      //   data: [<?php echo $jumlah;?>],
-      // },
 
     {
         type: 'spline',

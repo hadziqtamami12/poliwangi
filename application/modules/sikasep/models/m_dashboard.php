@@ -116,7 +116,7 @@ class m_dashboard extends CI_Model {
 		return $data->result();
 	}
 
-    public function bulan($hari_ini, $minggu_lalu)
+    public function bulan()
     {   
         $this->db->select('*, count(id_presensi) as total');
         $this->db->from('tb_presensi');
@@ -125,11 +125,28 @@ class m_dashboard extends CI_Model {
         $this->db->join('tb_jam_kerja', 'tb_presensi.id_jam_kerja = tb_jam_kerja.id_jam_kerja');
         $this->db->join('tb_jurusan', 'tb_pegawai.id_jurusan = tb_jurusan.id_jurusan');
         $this->db->order_by('jam_masuk','asc');
-        $this->db->where('tanggal_sekarang <=', $hari_ini);
-        $this->db->where('tanggal_sekarang >=', $minggu_lalu);
+        //$this->db->where('tanggal_sekarang <=', $hari_ini);
+        //$this->db->where('tanggal_sekarang >=', $minggu_lalu);
+      	$this->db->where('MONTH(tb_presensi.tanggal_sekarang)', date('m'));
         $this->db->where('jam_masuk !=', '0000:00:00 00:00:00');
         $this->db->group_by('tanggal_sekarang');
         // $this->db->like('id_rekap',$cari);
+        $data = $this->db->get();
+        return $data->result();
+    }
+
+    public function filter_bulan($bulan)
+    {   
+        $this->db->select('*, count(id_presensi) as total');
+        $this->db->from('tb_presensi');
+        $this->db->join('tb_pegawai', 'tb_presensi.id_pegawai = tb_pegawai.id_pegawai');
+        $this->db->join('tb_jabatan', 'tb_pegawai.id_jabatan = tb_jabatan.id_jabatan');
+        $this->db->join('tb_jam_kerja', 'tb_presensi.id_jam_kerja = tb_jam_kerja.id_jam_kerja');
+        $this->db->join('tb_jurusan', 'tb_pegawai.id_jurusan = tb_jurusan.id_jurusan');
+        $this->db->order_by('jam_masuk','asc');
+        $this->db->where('MONTH(tb_presensi.tanggal_sekarang)', $bulan);
+        $this->db->where('jam_masuk !=', '0000:00:00 00:00:00');
+        $this->db->group_by('tanggal_sekarang');
         $data = $this->db->get();
         return $data->result();
     }
@@ -146,7 +163,7 @@ class m_dashboard extends CI_Model {
         // $this->db->order_by('jam_masuk','asc');
         // $this->db->where('tanggal_sekarang <=', $hari_ini);
         // $this->db->where('tanggal_sekarang >=', $minggu_lalu);
-        $this->db->where('tanggal_sekarang', $hari_ini);
+        $this->db->where('MONTH(tb_presensi.tanggal_sekarang)', $hari_ini);
         $this->db->where('jam_masuk !=', '0000:00:00 00:00:00');
         // $this->db->where('tb_jurusan.jurusan', "Teknik Informatika")
         // ->or_where('tb_jurusan.jurusan', "Teknik Sipil")
@@ -212,6 +229,10 @@ class m_dashboard extends CI_Model {
 		return $data;
     }
 
+  	function validasi_update($where,$data,$table){
+		$this->db->where($where);
+		$this->db->update($table,$data);
+	}
 
 
 	public function jam_kerja()

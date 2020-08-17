@@ -16,11 +16,11 @@
 		<form method="post" action="<?php echo base_url('auth/login'); ?>" role="login">
 		
 			<div class="form-group has-feedback" id="inputan">
-				<input type="text" name="username" class="form-control" required minlength="4" placeholder="Username" />
+				<input type="text" name="username" class="form-control" required="true" minlength="4" placeholder="Username" />
 				<span class="glyphicon  glyphicon-user form-control-feedback"></span>
 			</div>
 			<div class="form-group has-feedback" id="inputan">
-				<input type="password" name="password" class="form-control" required minlength="5" placeholder="Password" />
+				<input type="password" name="password" class="form-control" required="true" minlength="5" placeholder="Password" />
 				<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 			</div>
 

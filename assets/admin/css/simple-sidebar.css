@@ -2,6 +2,7 @@ body {
   overflow-x: hidden;
 }
 
+
 .dropdown a{
   color: white;
   font-style: none;
@@ -10,26 +11,37 @@ body {
   justify-content: space-around;
 }
 
+.dropdown a.dropdown-item{
+  color : black;
+}
+
 .dropdown h6{
   color: white;
 }
+.dropdown-menu a{
+  padding: 5%;
+}
 
-.dropdown span.fa-user{
-  background-color: #D8B445;
+.dropdown-menu a:hover{
+  background-color: red;
   color: white;
-  width: 25px;
-  height: 27px;
-  text-align: center;
-  padding-top: 5%;
-  margin-top: -5%;
-  border-radius: 50%;
+}
+
+
+.dropdown-menu{
+  padding: 0;
+  margin-top: -3%;
+}
+
+
+#menu-toggle:hover{
+  cursor: pointer;
+  
 }
 
 #menu-toggle{
-  opacity: 0;
-  cursor: default;
-  margin-left: -90px;
-  margin-right: 90px;
+  margin-right: 5%;
+  margin-top: -1%;
 }
 @media(max-width: 768px){
   #menu-toggle{
@@ -109,7 +121,8 @@ div.btn-logout .line{
 }
 
 #sidebar-wrapper .sidebar-heading {
-  padding: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   text-align: center;
   background-color: #fff;
 
@@ -121,7 +134,8 @@ div.btn-logout .line{
 }
 
 #page-content-wrapper .navbar{
-  padding: 1%;
+  /*padding-top: 1rem;*/
+  /*padding-bottom: 1rem;*/
   padding-bottom: 0;
   display: flex;
   align-items: center;
@@ -153,23 +167,26 @@ div.btn-logout .line{
   }
 
   #wrapper.toggled #sidebar-wrapper {
-    margin-left: -15rem;
+    margin-left: -17rem;
   }
-
 }
 
 .nav-breadcrumb .breadcrumb-item {
-  color: white;
+  color: #5577D4;
   font-size: 0.9em;
 
 }
 
 .nav-breadcrumb .breadcrumb{
-  background-color: rgba(255,255,255, 0.3);
-  border-radius: 10%;
+  margin-top: 3%;
+
+  /*background-color: rgba(255,255,255, 0.3);*/
+  /*max-height: 20px;*/
+  /*border-radius: 10%;*/
+  right: 0;
 }
 
-.btn-logout{
+/*.btn-logout{
   bottom: 0;
   left: 0.5%;
   position: fixed;
@@ -177,6 +194,28 @@ div.btn-logout .line{
   margin-bottom: 1%;
 }
 
+
+.logout{
+  margin-top: 7%;
+}
+
+.logout a{
+  background-color: rgba(255,255,255, 0.3);
+  border-radius: 50%;
+  width: 90%;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 5%;
+
+}*/
+
+.logout a span{
+  margin-right: 15%;
+}
+
+.btn-logout{
+  margin-top: 35%;
+}
 
 .logout{
   margin-top: 7%;

@@ -36,7 +36,7 @@
         
 	
 
-    <table  class=" display  table-striped table-bordered" id="myTable" style="width:100%">
+    <table  class=" table table-responsive  table-striped table-bordered" id="myTable" style="width:100%">
             <thead>	
       		<tr>
                     <th>No</th>

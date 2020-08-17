@@ -1,7 +1,0 @@
-{
-    "require": {
-        "endroid/qr-code": "^3.8",
-        "picqer/php-barcode-generator": "^2.0",
-        "telegram-bot/api": "^2.3"
-    }
-}

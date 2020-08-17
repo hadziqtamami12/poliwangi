@@ -39,77 +39,80 @@ class Rekap extends MY_Controller {
 	{	
 
 		$tanggal_sekarang = date('Y-m-d');
-      	//$tanggal_sekarang = date('2020-07-31');
+      	$bulan_sekarang = date('m', strtotime($tanggal_sekarang));
 		$data = array(
 			'title' =>   'Rekap',
-			'rekap' => $this->m_rekap->rekap_list(),
-			 // 'absen' => $this->m_rekap->absen(),
+			'rekap' => $this->m_rekap->rekap_list($bulan_sekarang),
+			 //'total_hadir' => $this->m_rekap->total_hadir(),
 			'validasi' => $this->m_dashboard->validasi($tanggal_sekarang),
 			    // 't' => $this->total_jam()
 		);
 
 
-
-		foreach ($data['rekap'] as $p):
-
+		foreach ($data['rekap'] as $y):
 			
-			$p->hadir = 0;
-			$p->total = 0;
-			$p->total_semua = 0;
-			$p->total_jam = 0;
+      	$y->total_hadir = 0;		
+      	$y->total_jam = 0;
+      	$y->total = 0;
+      	$y->total_semua = 0;
+        
+        $totalhadir = $this->m_rekap->total_hadir($y->id_pegawai, date('m'));
+      
+      		foreach ($totalhadir as $p):
 
-			$p->total_hadir = count( (array) $p->id_presensi);
-
-			if (isset($p->jam_masuk)):
+			if (isset($p->jam_masuk) <= $p->jam_pulang):
 				$p->total_jam = date_diff(new DateTime($p->jam_masuk), new DateTime($p->jam_pulang))->h;
-
+				$p->total_hadir = 0;
 				
 				if ($p->jabatan == 'Dosen'):
-						if ($p->total_jam < 5):
-							$p->total_hadir = $p->total_hadir - 1;
+      				if (date("D")!="Sat" and date("D")!="Sun"):	
+						if ($p->total_jam > 5):
+							$p->total_hadir = $p->total_hadir + 1;
 						else:
 							$p->total_hadir = $p->total_hadir;
 						endif;
 						// $p->total_jam = $p->hadir * 5;
 						// $p->total = $p->uang_makan * $p->total_hadir;
 						// $p->total_semua = $p->total - $p->pajak;
+      				endif;
 				else:
-						$p->jam_masuk = date('H:i:s', strtotime($p->jam_masuk));
-						$p->jam_pulang = date('H:i:s', strtotime($p->jam_pulang));
+						$jam_masuk = date('H:i:s', strtotime($p->jam_masuk));
+						$jam_pulang = date('H:i:s', strtotime($p->jam_pulang));
 					
 
-					if ($p->jam_masuk < $p->jam_masuk_kerja && $p->jam_pulang > $p->jam_pulang_kerja):
+					if ($jam_masuk < $p->jam_masuk_kerja && $jam_pulang > $p->jam_pulang_kerja):
 						if ($p->jabatan == 'Satpam'):
-							if ($p->total_jam < 8):
-								$p->total_hadir = $p->total_hadir - 1;
+							if ($p->total_jam > 8):
+								$p->total_hadir = $p->total_hadir + 1;
 							else:
 								$p->total_hadir = $p->total_hadir;
 							endif;
 						else:
-							// if (date("D")!="Sat" and date("D")!="Sun"):
-								if ($p->total_jam < 8):
-									$p->total_hadir = $p->total_hadir - 1;
+							if (date("D")!="Sat" and date("D")!="Sun"):
+								if ($p->total_jam > 8):
+									$p->total_hadir = $p->total_hadir + 1;
 								else:
 									$p->total_hadir = $p->total_hadir;
 								endif;
 
-							// endif;
+							endif;
 						endif;
-					else:
-						$p->total_hadir = $p->total_hadir - 1;
+						else:
+						$p->total_hadir = $p->total_hadir;
 					endif;
 				endif;	
 			else:
-				if ($p->total_hadir > 0):
-					$p->total_hadir = $p->total_hadir - 1;
-				else:
-					$p->total_hadir = 0;
-				endif;
 
 			endif;
 				$p->total = $p->uang_makan * $p->total_hadir;
 				$p->total_semua = $p->total - $p->pajak;
-		endforeach;
+      			$y->total_hadir = $y->total_hadir + $p->total_hadir;
+                $y->total_jam = $y->total_jam + $p->total_jam;
+                $y->total = $y->total + $p->total;
+                $y->total_semua = $y->total_semua + $p->total_semua;
+		endforeach;		
+      endforeach;
+
 
 
 		if ($this->session->userdata['logged_in']==true):
@@ -122,10 +125,10 @@ class Rekap extends MY_Controller {
 
 	public function detail_rekap_pegawai($id_pegawai)
 	{	
-		// $id_pegawai = $this->input->post('id_pegawai');
+      	$bulan = date('m');
 		$data = array(
 			'title' => 'Laporan Rekap Pegawai',
-			'detail' => $this->m_rekap->detail_rekap_pegawai($id_pegawai),
+			'detail' => $this->m_rekap->detail_rekap_pegawai($id_pegawai, $bulan),
 		);
 
 		$data['dPegawai'] = $this->m_rekap->detail_pegawai($id_pegawai);
@@ -334,7 +337,7 @@ class Rekap extends MY_Controller {
 	{
 
 		// $tanggal_sekarang = date('Y-m-d');
-		$download = $this->m_rekap->rekap_list();
+		//$download = $this->m_rekap->rekap_list();
 
 
 		$spreadsheet = new Spreadsheet;
@@ -354,57 +357,95 @@ class Rekap extends MY_Controller {
 
 		$kolom = 2;
 		$nomor = 1;
-		foreach($download as $p):
-
-
-			if ($p->jabatan == 'Satpam'):
-				if (isset($p->jam_masuk)):
-					if ($p->jam_masuk <= $p->jam_masuk_kerja && $p->jam_pulang >= $p->jam_pulang_kerja):
-
-						$p->hadir = $p->total_hadir;
-						$p->total_jam = $p->hadir * 8;
-					endif;				
-				endif;				
-			else:				
-				if(isset($p->jam_masuk)):
-					$p->hadir = $p->total_hadir;
-					if ($p->jabatan == 'Dosen'):
-						$p->total_jam = $p->hadir * 5;
-					else:
-						if ($p->jam_masuk <= $p->jam_masuk_kerja && $p->jam_pulang >= $p->jam_pulang_kerja):
-							$p->total_jam = $p->hadir * 8;
-						endif;
-					endif;	
-				endif;
-			endif;
+      
+      
+      	$tanggal_sekarang = date('Y-m-d');
+      	$bulan_sekarang = date('m', strtotime($tanggal_sekarang));
+		$data = array(
+			'title' =>   'Rekap',
+			'rekap' => $this->m_rekap->rekap_list($bulan_sekarang),
+			 //'total_hadir' => $this->m_rekap->total_hadir(),
+			'validasi' => $this->m_dashboard->validasi($tanggal_sekarang),
+			    // 't' => $this->total_jam()
+		);
+      
+		foreach ($data['rekap'] as $y):
 			
-			
+      	$y->total_hadir = 0;		
+      	$y->total_jam = 0;
+      	$y->total = 0;
+      	$y->total_semua = 0;
+        
+        $totalhadir = $this->m_rekap->total_hadir($y->id_pegawai, date('m'));
+      
+      		foreach ($totalhadir as $p):
 
-
-			if ($p->total_jam == 0):
+			if (isset($p->jam_masuk) <= $p->jam_pulang):
+				$p->total_jam = date_diff(new DateTime($p->jam_masuk), new DateTime($p->jam_pulang))->h;
 				$p->total_hadir = 0;
-				$p->total = $p->uang_makan * $p->total_hadir;
+				
+				if ($p->jabatan == 'Dosen'):
+      				if (date("D")!="Sat" and date("D")!="Sun"):	
+						if ($p->total_jam > 5):
+							$p->total_hadir = $p->total_hadir + 1;
+						else:
+							$p->total_hadir = $p->total_hadir;
+						endif;
+						// $p->total_jam = $p->hadir * 5;
+						// $p->total = $p->uang_makan * $p->total_hadir;
+						// $p->total_semua = $p->total - $p->pajak;
+      				endif;
+				else:
+						$jam_masuk = date('H:i:s', strtotime($p->jam_masuk));
+						$jam_pulang = date('H:i:s', strtotime($p->jam_pulang));
+					
+
+					if ($jam_masuk < $p->jam_masuk_kerja && $jam_pulang > $p->jam_pulang_kerja):
+						if ($p->jabatan == 'Satpam'):
+							if ($p->total_jam > 8):
+								$p->total_hadir = $p->total_hadir + 1;
+							else:
+								$p->total_hadir = $p->total_hadir;
+							endif;
+						else:
+							if (date("D")!="Sat" and date("D")!="Sun"):
+								if ($p->total_jam > 8):
+									$p->total_hadir = $p->total_hadir + 1;
+								else:
+									$p->total_hadir = $p->total_hadir;
+								endif;
+
+							endif;
+						endif;
+						else:
+						$p->total_hadir = $p->total_hadir;
+					endif;
+				endif;	
 			else:
-				$p->total = $p->uang_makan * $p->total_hadir;
+
 			endif;
-
-			$p->total_semua = $p->total - $p->pajak;
-
+				$p->total = $p->uang_makan * $p->total_hadir;
+				$p->total_semua = $p->total - $p->pajak;
+      			$y->total_hadir = $y->total_hadir + $p->total_hadir;
+                $y->total_jam = $y->total_jam + $p->total_jam;
+                $y->total = $y->total + $p->total;
+                $y->total_semua = $y->total_semua + $p->total_semua;
+		endforeach;		
 
 
 
 			$spreadsheet->setActiveSheetIndex(0)
 			->setCellValue('A' . $kolom, $nomor)
-			->setCellValue('B' . $kolom, $p->nama_pegawai)
-			->setCellValue('C' . $kolom, $p->id_pegawai)
-			->setCellValue('D' . $kolom, $p->jabatan)
-			->setCellValue('E' . $kolom, $p->level_golongan)
-			->setCellValue('F' . $kolom, $p->total_hadir)
-			->setCellValue('G' . $kolom, $p->total_jam)
-			->setCellValue('H' . $kolom, $p->uang_makan)
-			->setCellValue('I' . $kolom, $p->total)
-			->setCellValue('J' . $kolom, $p->pajak)
-			->setCellValue('K' . $kolom, $p->total_semua);
+			->setCellValue('B' . $kolom, $y->nama_pegawai)
+			->setCellValue('C' . $kolom, $y->id_pegawai)
+			->setCellValue('D' . $kolom, $y->jabatan)
+			->setCellValue('E' . $kolom, $y->level_golongan)
+			->setCellValue('F' . $kolom, $y->total_hadir)
+			->setCellValue('G' . $kolom, $y->total_jam)
+			->setCellValue('H' . $kolom, $y->uang_makan)
+			->setCellValue('I' . $kolom, $y->total)
+			->setCellValue('J' . $kolom, $y->pajak)
+			->setCellValue('K' . $kolom, $y->total_semua);
 
 			$kolom++;
 			$nomor++;

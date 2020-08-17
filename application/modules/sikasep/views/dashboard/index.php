@@ -87,22 +87,28 @@
 
 <div class="container-fluid mt-2">
 
+<div class="container-fluid mt-2">
+
   <?php if ($this->session->userdata('id_level_user') == 2): ?>
     <a class="btn mb-3 btn-success" href="<?php echo base_url(); ?>sikasep/Dashboard/export_data"> <i class="fa fa-download"></i> Download </a>
   <?php endif; ?>
   <?php if ($this->session->userdata('id_level_user') == 2): 
     $bg = 'btn mb-3 btn-danger';
     $pesan = 'Belum Divalidasi';
-    foreach ($validasi as $p):
+    
+	if(date('d')==date('t')):
+	foreach ($validasi as $p):
       if ($p->status == 'tervalidasi'):
         $bg = 'btn mb-3 btn-info';
         $pesan = 'Sudah Tervalidasi';
       endif;
     endforeach;
     ?>
-    <a class="<?php echo $bg ?>" href="<?php echo base_url(); ?>sikasep/Dashboard/validasi" title="<?php echo $pesan; ?>"> <i class="fa fa-check"></i> <?= $pesan ?> </a>
+    <a class="<?php echo $bg ?>"  href="<?php echo base_url(); ?>sikasep/Dashboard/validasi" title="<?php echo $pesan; ?>"> <i class="fa fa-check"></i> <?= $pesan ?> </a>
     <?php  
-  endif;
+  endif;  
+endif;
+
   ?>
   <?php if ($this->session->userdata('id_level_user') == 3):
     foreach ($validasi as $p):
@@ -114,11 +120,11 @@
    endforeach; 
  endif; 
  ?>
- <!-- <a class="btn mb-3 btn-success" href="<?php echo base_url(); ?>sikasep/Dashboard/telegram_bot"> <i class="fa fa-download"></i> Tele tes </a> -->
-<div class="container card">
+
+ <div class="card">
   <div class="card-body"> 	
 
-    <table  class=" display  table-striped table-bordered text-center" id="myTable">
+    <table class=" table table-responsive table-striped table-bordered" id="myTable">
       <thead>
         <tr>
           <th>No</th>
@@ -173,8 +179,9 @@
     </table>
 
   </div>
-</div>
-  </div>
+</div></div>
+
+
 
 
 

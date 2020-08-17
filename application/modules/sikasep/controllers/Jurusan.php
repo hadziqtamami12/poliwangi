@@ -45,15 +45,18 @@ class Jurusan extends MY_Controller {
 
 	public function index(){
 
+    // $bulan_ini = $this->input->post($bulan);
 		$hari_ini = date('Y-m-d');
 		$bulan_ini = date('-1 month', strtotime($hari_ini));
 		$data = array(
 			'title' => 'Grafik Laporan Kehadiran Pegawai Poliwangi',
-      'bulan' => $this->m_dashboard->bulan($hari_ini, $bulan_ini),
+      'bulan' => $this->m_dashboard->bulan(),
       // 'jurusan' => $this->m_dashboard->jurusan($hari_ini, $bulan_ini),
-			'jurusan' => $this->m_dashboard->jurusan($hari_ini),
+			'jurusan' => $this->m_dashboard->jurusan($bulan_ini),
 
 		);
+
+
 
 
 		if ($this->session->userdata['logged_in']==true) {
@@ -67,13 +70,31 @@ class Jurusan extends MY_Controller {
 
 	}
 
+  public function filter_grafik(){
+    
+      $data = array(
+        'title' => 'Grafik Laporan Kehadiran Pegawai Poliwangi',
+        'bulan' => $this->m_dashboard->filter_bulan($this->input->post('bulan')),
+      );
+
+       if ($this->session->userdata['logged_in']==true) {
+           $this->template->load('layout/template', 'jurusan/index', $data);
+        }
+        else{
+          redirect('Login-User');
+        }
+
+      
+  }
+
   public function jurusan(){
 
     $hari_ini = date('Y-m-d');
     $bulan_ini = date('-1 month', strtotime($hari_ini));
     $data = array(
       'title' => 'Grafik Laporan Kehadiran Pegawai Poliwangi',
-      'bulan' => $this->m_dashboard->bulan($hari_ini, $bulan_ini),
+      'bulan' => $this->m_dashboard->bulan(),
+      //'bulan' => $this->m_dashboard->bulan($hari_ini, $bulan_ini),
       // 'jurusan' => $this->m_dashboard->jurusan($hari_ini, $bulan_ini),
       'jurusan' => $this->m_dashboard->jurusan($hari_ini),
 

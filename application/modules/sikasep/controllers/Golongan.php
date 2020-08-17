@@ -55,21 +55,21 @@ class Golongan extends MY_Controller {
 	}
 
 
-	public function tampil_golongan()
-	{	
+	// public function tampil_golongan()
+	// {	
 
-			$id = $this->input->post('id_level_golongan');
-			$data['f_golongan']	 = $this->m_golongan->view_data($id);
-			$data['title'] = 'Golongan Pegawai';
-			if ($this->input->post('id_level_golongan') == 'all') {
-				$data['f_golongan']	 = $this->m_golongan->all();
-			}
+	// 		$id = $this->input->post('id_level_golongan');
+	// 		$data['f_golongan']	 = $this->m_golongan->view_data($id);
+	// 		$data['title'] = 'Golongan Pegawai';
+	// 		if ($this->input->post('id_level_golongan') == 'all') {
+	// 			$data['f_golongan']	 = $this->m_golongan->all();
+	// 		}
 		 	
-		    $this->load->view('golongan/tabel_data', $data);
+	// 	    $this->load->view('golongan/tabel_data', $data);
 
 
 			
-	}
+	// }
 
 	public function add_data(){
 

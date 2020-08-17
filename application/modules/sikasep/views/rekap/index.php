@@ -1,21 +1,20 @@
-<div class="container-fluid mt-5">
+<div class="container mt-5 ">
     
 <?php if ($this->session->userdata('id_level_user') == 3):
-      foreach ($validasi as $p):
-        if ($p->status == 'tervalidasi' and $p->tanggal == date('Y-m-d')):
+			if(date('d')!=date('t')):
+				echo '<h1 class="text-center">Data hanya dapat dilihat pada akhir bulan</h1>';
+			else:
+			foreach ($validasi as $p):
+        	if ($p->status == 'tervalidasi' and $p->tanggal == date('Y-m-d')):
  ?>
 <a class="btn btn-success" href="<?php echo base_url(); ?>sikasep/Rekap/export_data_rekap"> <i class="fa fa-download"></i> Download </a>
-<?php 
-    endif; 
-    endforeach; 
-    endif; 
-?>
+
         <!-- table -->
  <div class="container card">
   <div class="card-body"> 	
 
-    <table  class=" display  table-striped table-bordered" id="myTable" style="width:100%">
-    <thead class="thead">
+    <table class="table table-responsive table-striped table-bordered" id="myTable">
+    		<thead>
                         <tr>
                             <th>No</th>
                             <th>Nama Pegawai</th>
@@ -46,7 +45,6 @@
                                 <td><?php echo $p->level_golongan;?></td> 
                                 <td><?php
                                         echo $p->total_hadir;
-
                                  ?></td>
                                 <td>
                                     <?php
@@ -58,19 +56,12 @@
                                     </td>
                                 <td>Rp. <?php echo $p->uang_makan ?></td>
                                 <td>Rp. <?php 
-                                if ($p->total_jam == 0) {
-                                    $p->total_hadir = 0;
-                                    $total = $p->uang_makan * $p->total_hadir;
-                                }
-                                else{
-                                    $total = $p->uang_makan * $p->total_hadir;
-                                }
 
-                                echo $total;
+                                echo $p->total;
                                  ?></td>
                                 <td>Rp. <?php echo $p->pajak; ?></td>
                                 <td>Rp. <?php 
-                                    echo $total_semua = $total - $p->pajak;
+                                    echo $p->total_semua;
                                  ?></td>
                                 <td class="text-center">
                                     <a href="<?= base_url('sikasep/Rekap/detail_rekap_pegawai/'.$p->id_pegawai);?>">
@@ -84,7 +75,21 @@
             </tbody>
         </table>
  
+    </div>
+
+     </div>
+  <?php 
+		else:
+			echo "<h1 class='text-center'>Silahkan hubungi kasubbag kepegawaian untuk melakukan validasi</h1>";
+      endif;      
+    endforeach; 
+	endif;        
+
+    endif; 
+?>
+
 
 </div>
+
 
 
